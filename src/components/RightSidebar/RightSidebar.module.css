@@ -1,0 +1,113 @@
+.sidebar-right .search {
+    background-color: white;
+    padding-bottom: 3px;
+    position: sticky;
+    top: 0;
+    display: flex;
+    flex-flow: row-reverse;
+}
+
+.sidebar-right .search-bar {
+    border-radius: 0 52px 52px 0;
+    background-color: var(--clr-light-gray);
+    border: none;
+    padding: 8px 100px 8px 0px;
+    font-size: 16px;
+    margin-top: 10px;
+
+}
+
+.sidebar-right .search-bar:focus {
+    outline: none; 
+}
+
+.sidebar-right .search-btn {
+    border-radius: 52px 0 0 52px;
+    background-color: var(--clr-light-gray);
+    border: none;
+    padding: 16px 30px;
+    margin-top: 10px;
+}
+
+
+.sidebar-right .search-btn .fa-magnifying-glass {
+    font-size: 15px;
+    color: var(--clr-font-gray);
+}
+
+/* 
+Trends */
+
+.sidebar-section {
+    background-color: var(--clr-light-gray);
+    margin-top: 15px;
+    border-radius: 18px;
+}
+
+.trends .trends-title {
+    padding: 20px;
+    font-size: 20px;
+}
+
+.trends .trend-card {
+    padding: 16px 20px;
+    font-size: 14px;
+}
+
+.trends .trend-card:hover {
+    background-color: var(--clr-hover-gray);
+    cursor: pointer;
+}
+
+.trends .trend-card .trend-hashtag {
+    margin: 5px 0;
+}
+
+.show-more-btn {
+    border-radius: 0 0 16px 16px;
+    width: 100%;
+    border: none;
+    background-color: var(--clr-light-gray);
+    padding: 20px;
+    color: var(--clr-blue);
+    font-size: 14px;
+    text-align: start;
+}
+
+.show-more-btn:hover {
+    background-color: var(--clr-hover-gray);
+    cursor: pointer;
+}
+
+.sidebar-right .profile-card {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    padding: 14px;
+    border-radius: 52px;
+}
+
+.sidebar-right .profile-card:hover {
+    cursor: pointer;
+    background-color: var(--clr-hover-gray);
+}
+
+.sidebar-right .profile-card .profile-photo {
+    object-fit: cover;
+    height: 42px;
+    width: 42px;
+    margin-right: 10px;
+    border-radius: 50%;
+}
+
+.sidebar-right .profile-card .profile-name {
+    margin: 3px;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.sidebar-right .profile-card .profile-handle {
+    margin: 3px;
+    font-size: 16px;
+    color: var(--clr-font-gray);
+}
