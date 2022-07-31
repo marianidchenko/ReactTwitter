@@ -1,0 +1,36 @@
+.form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 98vh;
+    width: 25vw;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.form-field {
+    font-size: 16px;
+    padding: 10px 20px;
+    border-radius: 25px;
+    border: 1px solid var(--clr-font-gray)
+}
+
+.form-btn {
+    font-size: 16px;
+    padding: 15px 20px;
+    border-radius: 25px;
+    border: none;
+    background-color: var(--clr-font-dark);
+    color: white;
+    font-weight: bold;
+}
+
+.form-btn:hover {
+    background-color: var(--clr-blue);
+    cursor: pointer;
+}
+
