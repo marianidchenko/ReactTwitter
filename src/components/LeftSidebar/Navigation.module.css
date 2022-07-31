@@ -30,10 +30,14 @@
     padding: 18px;
 }
 
+.menu-items p{
+    display: inline-block;
+    font-size: 18px;
+}
+
 .menu-items a {
     text-decoration: none;
     color: var(--clr-font-dark);
-    font-size: 20px;
     padding: 18px;
     border-radius: 52px;
 }
@@ -46,4 +50,28 @@
 .menu-items i {
     margin-right: 18px;
     font-size: 22px;
+}
+
+@media screen and (max-width: 1300px) {
+
+    .menu-items p {
+        display: none;
+    }
+    
+    .menu-logo {
+        width: 100%;
+        padding: 0px;
+        margin-top: 10px;
+        border-radius: 100%;
+    }
+
+    .menu-items {
+        padding: 0px;
+        margin: 25px 0 28px 20px;
+        border-radius: 100%;
+    }
+
+    .menu-items i {
+        margin: 0;
+    }
 }

@@ -11,6 +11,7 @@ export const LeftSidebar = () => {
         <aside className={styles["sidebar-left"]}>
            <Navigation />
             <button className={styles["sidebar-tweet"]}>Tweet</button>
+            <button className={styles["sidebar-tweet-compact"]}><i class="fa-solid fa-feather-pointed"></i></button>
             <article className={styles["profile-card"]}>
                 <img
                     src="http://forum.uscutter.com/uploads/monthly_2017_09/M.png.cd19cd32020dba58356a4fc070a73ad3.png"

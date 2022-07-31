@@ -5,7 +5,6 @@
     display: flex;
     flex-direction: column;
     height: 100vh;
-    width: 570px;
 }
 
 .sidebar-left .sidebar-tweet {
@@ -17,6 +16,23 @@
     border-radius: 52px;
     padding: 15px;
     margin: 18px;
+}
+
+.sidebar-left .sidebar-tweet-compact {
+    display: none;
+    font-size: 17px;
+    font-weight: 700;
+    color: white;
+    background: var(--clr-blue);
+    border: none;
+    border-radius: 52px;
+    padding: 12px;
+    width: 45px;
+}
+
+.sidebar-left .sidebar-tweet-compact:hover {
+    cursor: pointer;
+    background-color: rgb(26, 138, 212);
 }
 
 .sidebar-left .sidebar-tweet:hover {
@@ -61,7 +77,7 @@
     color: var(--clr-font-gray);
 }
 
-.sidebar-left .profile-card .fa-ellipsis {
+.sidebar-left .profile-card i {
     margin-left: 20px;
     font-size: 18px;
     color: var(--clr-font-gray);
@@ -97,4 +113,38 @@
 .profile-card-menu .logout-btn:hover {
     background-color: var(--clr-light-gray);
     cursor: pointer;
+}
+
+@media screen and (max-width: 1300px) {
+    .sidebar-left {
+        align-items: center;
+    }
+    .sidebar-left .profile-card {
+        padding: none;
+        margin-bottom: 15px;
+    }
+
+    .sidebar-left .profile-card .profile-photo {
+        margin: 0;
+    }
+
+    .sidebar-left .profile-card .profile-name {
+        display: none;
+    }
+
+    .sidebar-left .profile-card i {
+        display: none;
+    }
+    
+    .sidebar-left .profile-card .profile-handle {
+        display: none;
+    }
+
+    .sidebar-left .sidebar-tweet {
+        display: none;
+    }
+
+    .sidebar-left .sidebar-tweet-compact {
+        display: block;
+    }
 }

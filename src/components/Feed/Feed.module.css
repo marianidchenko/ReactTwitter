@@ -1,4 +1,5 @@
 .main-feed {
+    width: 600px;
     flex-grow: 1;
     margin: 0 30px;
 }
@@ -27,8 +28,8 @@
 
 .compose-tweet .profile-photo {
     object-fit: cover;
-    height: 50px;
-    width: 50px;
+    height: 42px;
+    width: 42px;
     border-radius: 50%;
 }
 
@@ -40,7 +41,7 @@
 
 
 .compose-tweet .tweet-text {
-    font-size: 20px;
+    font-size: 18px;
     border: none;
     margin: 15px;
 }
@@ -63,4 +64,10 @@
 .compose-tweet .tweet-btn:hover {
     cursor: pointer;
     background-color: rgb(26, 138, 212);
+}
+
+@media screen and (max-width: 1300px) {
+    .main-feed {
+        margin-left: 0
+    }
 }
