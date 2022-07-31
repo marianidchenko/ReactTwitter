@@ -134,6 +134,8 @@
 }
 
 .profile-card-menu .logout-btn {
+    border: none;
+    background-color: white;
     text-decoration: none;
     color: var(--clr-font-dark);
     padding: 20px;
@@ -142,4 +144,5 @@
 
 .profile-card-menu .logout-btn:hover {
     background-color: var(--clr-light-gray);
+    cursor: pointer;
 }

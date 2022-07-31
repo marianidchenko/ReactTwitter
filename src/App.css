@@ -1,0 +1,23 @@
+:root {
+    --clr-blue: #1d9bf0;
+    --clr-font-dark: #0f1419;
+    --clr-font-gray: #7b8892;
+    --clr-hover-gray: #e7e7e8;
+    --clr-light-gray: #eff3f4;
+    --clr-hover-blue: rgb(214, 231, 248);
+  }
+  
+  body {
+    display: flex;
+    justify-content: center;
+    margin: 0px;
+  }
+  
+  .container {
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    width: 1300px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  

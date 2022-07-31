@@ -1,5 +1,11 @@
 import styles from './LeftSidebar.module.css'
+import * as authService from "../../services/authServices"
+import { useContext } from 'react'
+import { AuthContext } from '../../contexts/authContext'
+
 export const LeftSidebar = () => {
+    const { user } = useContext(AuthContext);
+
     return (
         <aside className={styles["sidebar-left"]}>
             <ul className={styles["menu"]}>
@@ -64,7 +70,7 @@ export const LeftSidebar = () => {
                 />
                 <div className={styles["profile-info"]}>
                     <h3 className={styles["profile-name"]}>Maria Nidchenko</h3>
-                    <p className={styles["profile-handle"]}>@mnidchenko</p>
+                    <p className={styles["profile-handle"]}>{user.email}</p>
                 </div>
                 <i className="fa-solid fa-ellipsis" />
                 <div className={styles["profile-card-menu"]}>
@@ -79,9 +85,9 @@ export const LeftSidebar = () => {
                             <p className={styles["profile-handle"]}>@mnidchenko</p>
                         </div>
                     </article>
-                    <a href="" className={styles["logout-btn"]}>
+                    <button href="" className={styles["logout-btn"]} onClick={authService.logout}>
                         Log out of @mnidchenko
-                    </a>
+                    </button>
                 </div>
             </article>
         </aside>
