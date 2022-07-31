@@ -1,6 +1,6 @@
 import "./App.css"
 
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { auth } from "./firebase-config"
 
 import { Login } from './components/AuthForms/Login/Login';
