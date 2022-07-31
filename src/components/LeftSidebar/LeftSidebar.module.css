@@ -42,102 +42,11 @@
 
 /* Profile card  */
 
-.sidebar-left .profile-card {
-    margin-top: auto;
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    padding: 14px;
-    border-radius: 52px;
-    position: relative;
-}
 
-.sidebar-left .profile-card:hover {
-    cursor: pointer;
-    background-color: var(--clr-hover-gray);
-}
-
-.sidebar-left .profile-card .profile-photo {
-    object-fit: cover;
-    height: 42px;
-    width: 42px;
-    margin-right: 10px;
-    border-radius: 50%;
-}
-
-.sidebar-left .profile-card .profile-name {
-    margin: 3px;
-    font-weight: 600;
-    font-size: 16px;
-}
-
-.sidebar-left .profile-card .profile-handle {
-    margin: 3px;
-    font-size: 16px;
-    color: var(--clr-font-gray);
-}
-
-.sidebar-left .profile-card i {
-    margin-left: 20px;
-    font-size: 18px;
-    color: var(--clr-font-gray);
-}
-
-.sidebar-left .profile-card-menu {
-    position: absolute;
-    bottom: 75px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    border-radius: 20px;
-    padding: 15px 0;
-    background-color: white;
-    box-shadow: 0px 0px 5px 3px rgba(0, 0, 0, 0.10);
-}
-
-.profile-card-menu .profile-section {
-    display: flex;
-    padding: 20px;
-    width: 250px
-}
-
-.profile-card-menu .logout-btn {
-    border: none;
-    background-color: white;
-    text-decoration: none;
-    color: var(--clr-font-dark);
-    padding: 20px;
-
-}
-
-.profile-card-menu .logout-btn:hover {
-    background-color: var(--clr-light-gray);
-    cursor: pointer;
-}
 
 @media screen and (max-width: 1300px) {
     .sidebar-left {
         align-items: center;
-    }
-    .sidebar-left .profile-card {
-        padding: none;
-        margin-bottom: 15px;
-    }
-
-    .sidebar-left .profile-card .profile-photo {
-        margin: 0;
-    }
-
-    .sidebar-left .profile-card .profile-name {
-        display: none;
-    }
-
-    .sidebar-left .profile-card i {
-        display: none;
-    }
-    
-    .sidebar-left .profile-card .profile-handle {
-        display: none;
     }
 
     .sidebar-left .sidebar-tweet {
