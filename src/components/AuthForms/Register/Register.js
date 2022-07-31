@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 import "../form.css"
 
@@ -14,7 +14,7 @@ export const Register = () => {
     const onRegister = (e) => {
         e.preventDefault();
         authService.register(email, password);
-        navigate("/")
+        navigate("/profile-setup")
     }
 
     return (
@@ -30,6 +30,7 @@ export const Register = () => {
                     placeholder="Repeat password"
                 />
                 <input type="submit" className="form-btn" defaultValue="Next" />
+                <Link to="/login" className="suggestion">Already have an account? Sign in here.</Link>
             </form>
         </div>
 

@@ -10,6 +10,7 @@
     display: flex;
     flex-direction: column;
     gap: 30px;
+    margin-top: 30px;
 }
 
 .form-field {
@@ -34,3 +35,8 @@
     cursor: pointer;
 }
 
+.suggestion {
+    font-size: 20px;
+    color: var(--clr-blue);
+    text-decoration: none;
+}
