@@ -1,21 +1,19 @@
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import { Login } from './components/AuthForms/Login/Login';
 import { ProfileSetup } from './components/AuthForms/Register/ProfileSetup';
 import { Register } from './components/AuthForms/Register/Register';
+import { Home } from './components/Home/Home';
 
-
-import { Feed } from './components/Feed/Feed';
-import { LeftSidebar } from './components/LeftSidebar/LeftSidebar';
-import { RightSidebar } from './components/RightSidebar/RightSidebar';
 
 function App() {
   return (
     <div className="container">
-      <LeftSidebar />
-      <Feed />
-      <RightSidebar />
-      <Register />
-      <ProfileSetup />
-      <Login / >
+      <Routes>
+        <Route path="/login" component={Login} element={<Login />}/>
+        <Route path="/register" component={Register} element={<Register />}/>
+        <Route path="/profile-setup" component={ProfileSetup} element={<ProfileSetup />}/>
+        <Route path="/" component={Home} element={<Home />}/>
+      </Routes>
     </div>
   );
 }
