@@ -14,7 +14,7 @@ export const Feed = () => {
             {user
                 ? <div className={styles['compose-tweet']}>
                     <img
-                        src="http://forum.uscutter.com/uploads/monthly_2017_09/M.png.cd19cd32020dba58356a4fc070a73ad3.png"
+                        src={user.photoURL}
                         alt=""
                         className={styles['profile-photo']}
                     />

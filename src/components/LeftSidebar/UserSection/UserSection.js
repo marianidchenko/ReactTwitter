@@ -34,8 +34,7 @@ export const UserSection = ({ user }) => {
                 <button href="" className={styles["logout-btn"]} onClick={authService.logout}>
                     Log out of @{username}
                 </button>
-            </div>
-            }
+            </div>}
 
         </article>
     )

@@ -1,4 +1,4 @@
-import { updateProfile } from 'firebase/auth'
+import {  updateProfile } from 'firebase/auth'
 import { useContext } from "react"
 import { useNavigate } from "react-router-dom"
 import { AuthContext } from "../../../contexts/authContext"
@@ -21,8 +21,8 @@ export const ProfileSetup = () => {
             photoURL: imageUrl,
         })
 
-        navigate('/')
-        
+        setTimeout(function () { navigate('/'); }, 500);
+
     };
 
     return (
