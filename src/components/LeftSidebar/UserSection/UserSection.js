@@ -1,10 +1,13 @@
 import styles from './UserSection.module.css'
 import * as authService from "../../../services/authServices"
-export const UserSection = ({user}) => {
+import { useState } from 'react';
+export const UserSection = ({ user }) => {
     const [displayName, username] = user.displayName.split('/');
+    const [showOptions, setShowOptions] = useState(false)
+    const onClick = () => setShowOptions(!showOptions)
 
     return (
-        <article className={styles["profile-card"]}>
+        <article className={styles["profile-card"]} onClick={onClick}>
             <img
                 src={user.photoURL}
                 alt=""
@@ -15,6 +18,7 @@ export const UserSection = ({user}) => {
                 <p className={styles["profile-handle"]}>@{username}</p>
             </div>
             <i className="fa-solid fa-ellipsis" />
+            {showOptions && 
             <div className={styles["profile-card-menu"]}>
                 <article className={styles["profile-section"]}>
                     <img
@@ -31,6 +35,8 @@ export const UserSection = ({user}) => {
                     Log out of @{username}
                 </button>
             </div>
+            }
+
         </article>
     )
 }

@@ -11,7 +11,7 @@ export const Navigation = ({ user }) => {
                 </Link>
             </li>
             <li className={styles["menu-items"]}>
-                <Link to="" className={styles["menu-Link"]}>
+                <Link to="/" className={styles["menu-Link"]}>
                     <i className="fa-solid fa-house-chimney-window" />
                     <p>Home</p>
                 </Link>

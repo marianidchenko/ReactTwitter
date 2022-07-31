@@ -14,9 +14,9 @@ export const LeftSidebar = () => {
 
             {user?.accessToken
                 ? <Fragment>
-                    <UserSection user={user} />
                     <button className={styles["sidebar-tweet"]}>Tweet</button>
-                    <button className={styles["sidebar-tweet-compact"]}><i class="fa-solid fa-feather-pointed"></i></button>
+                    <button className={styles["sidebar-tweet-compact"]}><i className="fa-solid fa-feather-pointed"></i></button>
+                    <UserSection user={user} />
                 </Fragment>
                 : ""
             }
