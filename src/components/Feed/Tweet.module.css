@@ -20,6 +20,8 @@
 
 .tweet .tweet-contents {
     width: 80%;
+    font-size: 15px;
+    line-height: 130%;
 }
 
 .tweet .tweet-contents .tweet-name {
