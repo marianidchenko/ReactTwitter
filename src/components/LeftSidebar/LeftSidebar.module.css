@@ -8,54 +8,6 @@
     width: 570px;
 }
 
-.sidebar-left .menu {
-    list-style-type: none;
-    padding: 0px;
-    margin: 0px;
-}
-
-.sidebar-left .menu * {
-    margin-bottom: 2px;
-}
-
-.sidebar-left .menu-logo {
-    margin: 8px 24px;
-}
-
-.sidebar-left .menu-logo i {
-    padding: 12px;
-    font-size: 28px;
-    color: var(--clr-blue);
-    border-radius: 52px;
-}
-
-.sidebar-left .menu-logo i:hover {
-    cursor: pointer;
-    background-color: var(--clr-hover-blue);
-}
-
-.sidebar-left .menu-items {
-    padding: 18px;
-}
-
-.sidebar-left .menu-items a {
-    text-decoration: none;
-    color: var(--clr-font-dark);
-    font-size: 20px;
-    padding: 18px;
-    border-radius: 52px;
-}
-
-.sidebar-left .menu-items a:hover {
-    cursor: pointer;
-    background-color: var(--clr-hover-gray);
-}
-
-.sidebar-left .menu-items i {
-    margin-right: 18px;
-    font-size: 22px;
-}
-
 .sidebar-left .sidebar-tweet {
     font-size: 17px;
     font-weight: 700;

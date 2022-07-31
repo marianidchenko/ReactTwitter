@@ -1,0 +1,49 @@
+
+
+.menu {
+    list-style-type: none;
+    padding: 0px;
+    margin: 0px;
+}
+
+.menu * {
+    margin-bottom: 2px;
+}
+
+.menu-logo {
+    margin: 8px 24px;
+}
+
+.menu-logo i {
+    padding: 12px;
+    font-size: 28px;
+    color: var(--clr-blue);
+    border-radius: 52px;
+}
+
+.menu-logo i:hover {
+    cursor: pointer;
+    background-color: var(--clr-hover-blue);
+}
+
+.menu-items {
+    padding: 18px;
+}
+
+.menu-items a {
+    text-decoration: none;
+    color: var(--clr-font-dark);
+    font-size: 20px;
+    padding: 18px;
+    border-radius: 52px;
+}
+
+.menu-items a:hover {
+    cursor: pointer;
+    background-color: var(--clr-hover-gray);
+}
+
+.menu-items i {
+    margin-right: 18px;
+    font-size: 22px;
+}
