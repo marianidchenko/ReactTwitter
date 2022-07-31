@@ -1,6 +1,8 @@
-import { Fragment } from 'react'
+import { Fragment, useContext } from 'react'
+import { AuthContext } from '../../contexts/authContext';
 import styles from './Tweet.module.css'
 export const Tweet = () => {
+    const { user } = useContext(AuthContext);
     return (
         <Fragment>
             <div className={styles["tweet"]}>
@@ -14,20 +16,24 @@ export const Tweet = () => {
                         rem, ipsum quis maiores ex.
                     </p>
                 </article>
-                <div className={styles["interaction-menu"]}>
-                    <a href="" className={styles["interaction-btn"]}>
-                        <i className="fa-solid fa-message" />
-                    </a>
-                    <a href="" className={styles["interaction-btn"]}>
-                        <i className="fa-solid fa-retweet" />
-                    </a>
-                    <a href="" className={styles["interaction-btn"]}>
-                        <i className="fa-solid fa-heart" />
-                    </a>
-                    <a href="" className={styles["interaction-btn"]}>
-                        <i className="fa-solid fa-arrow-up-from-bracket" />
-                    </a>
-                </div>
+                {user
+                    ? <div className={styles["interaction-menu"]}>
+                        <a href="" className={styles["interaction-btn"]}>
+                            <i className="fa-solid fa-message" />
+                        </a>
+                        <a href="" className={styles["interaction-btn"]}>
+                            <i className="fa-solid fa-retweet" />
+                        </a>
+                        <a href="" className={styles["interaction-btn"]}>
+                            <i className="fa-solid fa-heart" />
+                        </a>
+                        <a href="" className={styles["interaction-btn"]}>
+                            <i className="fa-solid fa-arrow-up-from-bracket" />
+                        </a>
+                    </div>
+                    : ""
+                }
+
             </div>
             <div className={styles["tweet"]}>
                 <img
