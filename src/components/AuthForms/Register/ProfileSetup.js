@@ -1,7 +1,8 @@
-import {  updateProfile } from 'firebase/auth'
+import { updateProfile } from 'firebase/auth'
 import { useContext } from "react"
 import { useNavigate } from "react-router-dom"
 import { AuthContext } from "../../../contexts/authContext"
+import { auth } from '../../../firebase-config'
 import "../form.css"
 
 export const ProfileSetup = () => {
@@ -16,12 +17,14 @@ export const ProfileSetup = () => {
             username,
             imageUrl,
         } = Object.fromEntries(new FormData(e.target));
+        
         updateProfile(user, {
             displayName: displayName + '/' + username,
             photoURL: imageUrl,
-        })
+        }).then(() => {
+            navigate('/');
+        }) .catch((error) => console.log(error));
 
-        setTimeout(function () { navigate('/'); }, 500);
 
     };
 

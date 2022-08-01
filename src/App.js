@@ -10,14 +10,11 @@ import { Home } from './components/Home/Home';
 import { useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { AuthContext } from "./contexts/authContext";
+import { useAuth } from "./hooks/useAuth";
 
 function App() {
 
-  const [user, setUser] = useState({});
-
-  onAuthStateChanged(auth, (currentUser) => {
-    setUser(currentUser);
-  })
+  const user = useAuth();
 
   return (
     <AuthContext.Provider value={{ user }}>
