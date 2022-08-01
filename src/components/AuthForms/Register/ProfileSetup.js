@@ -2,7 +2,6 @@ import { updateProfile } from 'firebase/auth'
 import { useContext } from "react"
 import { useNavigate } from "react-router-dom"
 import { AuthContext } from "../../../contexts/authContext"
-import { auth } from '../../../firebase-config'
 import "../form.css"
 
 export const ProfileSetup = () => {
@@ -11,13 +10,12 @@ export const ProfileSetup = () => {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        console.log(user)
         const {
             displayName,
             username,
             imageUrl,
         } = Object.fromEntries(new FormData(e.target));
-        
+
         updateProfile(user, {
             displayName: displayName + '/' + username,
             photoURL: imageUrl,
