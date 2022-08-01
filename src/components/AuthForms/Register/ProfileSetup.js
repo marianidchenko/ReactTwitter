@@ -2,7 +2,7 @@ import { updateProfile } from 'firebase/auth'
 import { useContext, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { AuthContext } from "../../../contexts/authContext"
-import { upload } from '../../../firebase-config'
+import { upload } from '../../../services/profilePhotoServices'
 import "../form.css"
 
 export const ProfileSetup = () => {
