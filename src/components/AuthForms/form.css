@@ -79,6 +79,11 @@ input[type=file]::-webkit-file-upload-button {
     cursor: pointer;
 }
 
+.form-btn:disabled {
+    color: var(--clr-font-gray);
+    pointer-events: none;
+}
+
 .suggestion {
     font-size: 20px;
     color: var(--clr-blue);
