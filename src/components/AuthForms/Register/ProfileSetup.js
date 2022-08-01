@@ -1,29 +1,38 @@
 import { updateProfile } from 'firebase/auth'
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { AuthContext } from "../../../contexts/authContext"
+import { upload } from '../../../firebase-config'
 import "../form.css"
 
 export const ProfileSetup = () => {
     const navigate = useNavigate();
+    const [photo, setPhoto] = useState(null);
+    const [loading, setLoading] = useState(false);
     const { user } = useContext(AuthContext);
+    const handleChange = (e) => {
+        if (e.target.files[0] && user) {
+            setPhoto(e.target.files[0])
+        }
+    }
+
+    const handleClick = (e) => {
+        e.preventDefault()
+        upload(photo, user, setLoading)
+    }
 
     const onSubmit = (e) => {
         e.preventDefault();
         const {
             displayName,
             username,
-            imageUrl,
         } = Object.fromEntries(new FormData(e.target));
-
         updateProfile(user, {
             displayName: displayName + '/' + username,
-            photoURL: imageUrl,
+
         }).then(() => {
             navigate('/');
-        }) .catch((error) => console.log(error));
-
-
+        }).catch((error) => console.log(error));
     };
 
     return (
@@ -33,8 +42,9 @@ export const ProfileSetup = () => {
             <form className="form" onSubmit={onSubmit}>
                 <input type="text" className="form-field" name="displayName" placeholder="Display Name" />
                 <input type="text" className="form-field" name="username" placeholder="Username" />
-                <input type="text" className="form-field" name="imageUrl" placeholder="Image URL" />
-                <input type="submit" className="form-btn" defaultValue="Register" />
+                <label className="image-label" htmlFor="files">Choose Image:<input type="file" className="image-field" name="image" id="files" onChange={handleChange} /></label>
+                <button className="image-btn" onClick={handleClick}>Upload</button>
+                <input type="submit" disabled={loading || !photo} className="form-btn" defaultValue="Register" />
             </form>
         </div>
 
