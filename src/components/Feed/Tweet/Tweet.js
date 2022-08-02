@@ -1,9 +1,15 @@
 import { useContext, useEffect, useState } from 'react'
-import { AuthContext } from '../../contexts/authContext';
+import { AuthContext } from '../../../contexts/authContext';
 import styles from './Tweet.module.css'
 export const Tweet = (props) => {
     const [currentUsername, setCurrentUsername] = useState("")
+    const [tweetControl, setTweetControl] = useState(false)
     const { user } = useContext(AuthContext);
+
+    const onToggleOptions = (e) => {
+        e.preventDefault();
+        setTweetControl(!tweetControl)
+    }
 
     useEffect(() => {
         if (user) {
@@ -44,14 +50,24 @@ export const Tweet = (props) => {
                         <i className="fa-solid fa-arrow-up-from-bracket" />
                     </a>
                     {currentUsername == props.username &&
-                        <a href="" className={styles["interaction-btn"]}>
+                        <a href="" className={styles["interaction-btn"]} onClick={onToggleOptions} onBlur={() => setTweetControl(false)}>
                             <i className="fa-solid fa-ellipsis" />
                         </a>
-
                     }
                 </div>
-
             }
+            <div className={styles["interaction-container"]}>
+                {tweetControl &&
+                    <div className={styles["tweet-card-menu"]}>
+                        <button href="" className={styles["btn"]}>
+                            Edit Post
+                        </button>
+                        <button href="" className={styles["btn"]}>
+                            Delete Post
+                        </button>
+                    </div>
+                }
+            </div>
 
         </div>
     );

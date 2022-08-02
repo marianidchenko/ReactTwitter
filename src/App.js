@@ -1,6 +1,7 @@
 import "./App.css"
 
 import { Routes, Route } from 'react-router-dom';
+import { auth } from "./firebase-config"
 
 import { Login } from './components/AuthForms/Login/Login';
 import { ProfileSetup } from './components/AuthForms/Register/ProfileSetup';

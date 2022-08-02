@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import * as tweetServices from '../../services/tweetServices'
+import * as tweetServices from "../../../services/tweetServices"
 import styles from './ComposeTweet.module.css'
 
 export const ComposeTweet = ({ user, updateTweets }) => {

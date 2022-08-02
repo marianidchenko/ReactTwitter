@@ -1,4 +1,6 @@
 .tweet {
+    left:0px;
+    bottom: 0px;
     display: flex;
     flex-wrap: wrap;
     padding: 15px;
@@ -45,6 +47,8 @@
 }
 
 .tweet .interaction-menu {
+    display: flex;
+    flex-wrap: wrap;
     flex-grow: 1;
     width: 100%;
     display: flex;
@@ -60,4 +64,39 @@
 
 .tweet .interaction-menu .interaction-btn:hover {
     background-color: var(--clr-hover-blue);
+    
+}
+
+
+/* # Menu */
+.interaction-container {
+    position: relative;
+    right: 90px;
+    top: 50px;
+}
+
+.tweet-card-menu {
+    width: 150px;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 20px;
+    padding: 15px 0;
+    background-color: white;
+    box-shadow: 0px 0px 5px 3px rgba(0, 0, 0, 0.10);
+
+}
+
+.tweet-card-menu .btn {
+    border: none;
+    background-color: white;
+    text-decoration: none;
+    color: var(--clr-font-dark);
+    padding: 15px 30px;
+}
+
+.tweet-card-menu .btn:hover {
+    background-color: var(--clr-light-gray);
+    cursor: pointer;
 }

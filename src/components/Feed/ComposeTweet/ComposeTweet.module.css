@@ -73,3 +73,8 @@
     width: 130px;
     color: var(--clr-font-gray);
 }
+
+input[type=file]::-webkit-file-upload-button {
+    width: 0px;
+    visibility: hidden;
+}
