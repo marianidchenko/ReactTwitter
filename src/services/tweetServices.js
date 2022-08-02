@@ -1,5 +1,5 @@
 import { db, storage } from '../firebase-config';
-import { collection, getDocs, getDoc, addDoc, updateDoc, deleteDoc, doc } from 'firebase/firestore';
+import { collection, getDocs, getDoc, addDoc, updateDoc, deleteDoc, doc, where, query } from 'firebase/firestore';
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import uniqid from 'uniqid';
 
@@ -26,6 +26,12 @@ export const getAll = () => {
 export const getOne = (id) => {
     const tweetRef = doc(db, "tweets", id);
     return getDoc(tweetRef);
+}
+
+export const getByOwner = (uid) => {
+    const q = query(tweetCollectionRef, where("ownerId", "==", uid));
+    getDocs(q)
+        .then(docs => {console.log(docs)})
 }
 
 export async function uploadMedia(file, currentUser, setLoading) {

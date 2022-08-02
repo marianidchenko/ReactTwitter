@@ -1,10 +1,15 @@
 import styles from './UserSection.module.css'
 import * as authService from "../../../services/authServices"
 import { useState } from 'react';
+import { getByOwner } from '../../../services/tweetServices';
 export const UserSection = ({ user }) => {
     const [displayName, username] = user.displayName.split('/');
     const [showOptions, setShowOptions] = useState(false)
     const onClick = () => setShowOptions(!showOptions)
+
+    const showUserTweets = () => {
+        getByOwner(user.uid)
+    }
 
     return (
         <article className={styles["profile-card"]} onClick={onClick}>
@@ -20,7 +25,7 @@ export const UserSection = ({ user }) => {
             <i className="fa-solid fa-ellipsis" />
             {showOptions && 
             <div className={styles["profile-card-menu"]}>
-                <article className={styles["profile-section"]}>
+                <article className={styles["profile-section"]} onClick={showUserTweets}>
                     <img
                         src={user.photoURL}
                         alt=""

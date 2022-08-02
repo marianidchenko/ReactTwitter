@@ -5,8 +5,8 @@ import styles from './ComposeTweet.module.css'
 export const ComposeTweet = ({ user, updateTweets }) => {
     const [displayName, username] = user.displayName.split('/');
     const [tweetText, setTweetText] = useState("");
-    const [loading, setLoading] = useState(false);
-    const [media, setMedia] = useState(null);
+    const [loading, setLoading] = useState("");
+    const [media, setMedia] = useState("");
     const [upload, setUpload] = useState(null);
 
     const onTextChange = (e) => {
@@ -31,12 +31,12 @@ export const ComposeTweet = ({ user, updateTweets }) => {
                     username,
                     "photoURL": user.photoURL,
                     tweetText,
-                    timestamp: new Date().getTime()/1000
+                    timestamp: new Date().getTime()/1000,
+                    ownerId: user.uid
                 }
                 try {
                     tweetServices.add(tweet)
                     updateTweets();
-
                     
                 } catch (error) {
                     console.log(error);
