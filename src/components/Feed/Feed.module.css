@@ -20,51 +20,7 @@
 
 /* Compose Tweet */
 
-.compose-tweet {
-    display: flex;
-    border: 1px solid var(--clr-light-gray);
-    padding: 15px;
-}
 
-.compose-tweet .profile-photo {
-    object-fit: cover;
-    height: 42px;
-    width: 42px;
-    border-radius: 50%;
-}
-
-.compose-tweet .tweet-contents {
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-}
-
-
-.compose-tweet .tweet-text {
-    font-size: 18px;
-    border: none;
-    margin: 15px;
-}
-
-.compose-tweet .tweet-text:focus {
-    outline: none; 
-}
-
-.compose-tweet .tweet-btn {
-    margin-left: auto;
-    font-size: 14px;
-    font-weight: 700;
-    color: white;
-    background: var(--clr-blue);
-    border: none;
-    border-radius: 52px;
-    padding: 10px 20px;
-}
-
-.compose-tweet .tweet-btn:hover {
-    cursor: pointer;
-    background-color: rgb(26, 138, 212);
-}
 
 @media screen and (max-width: 1300px) {
     .main-feed {
