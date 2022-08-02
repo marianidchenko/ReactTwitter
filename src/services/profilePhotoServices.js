@@ -4,7 +4,7 @@ import { storage } from "../firebase-config";
 
 
 export async function upload(file, currentUser, setLoading) {
-    const fileRef = ref(storage, currentUser.uid + '.png');
+    const fileRef = ref(storage, "profile/" + currentUser.uid + '.png');
 
     const metadata = {
         contentType: 'image/jpeg',

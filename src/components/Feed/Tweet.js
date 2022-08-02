@@ -14,7 +14,7 @@ export const Tweet = (props) => {
                 </p>
                 {props.mediaURL
                     ? <img
-                        src="https://thumbs.dreamstime.com/b/forrest-27720334.jpg"
+                        src={props.mediaURL}
                         alt=""
                         className={styles["tweet-media"]} />
                     : ""

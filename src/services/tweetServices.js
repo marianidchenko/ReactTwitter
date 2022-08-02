@@ -1,11 +1,12 @@
 import { db, storage } from '../firebase-config';
 import { collection, getDocs, getDoc, addDoc, updateDoc, deleteDoc, doc } from 'firebase/firestore';
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import uniqid from 'uniqid';
 
 const tweetCollectionRef = collection(db, "tweets");
 
 export const add = (newTweet) => {
-    return addDoc(tweetCollectionRef, newTweet);
+    addDoc(tweetCollectionRef, newTweet);
 }
 
 export const update = (id, updatedTweet) => {
@@ -28,7 +29,7 @@ export const getOne = (id) => {
 }
 
 export async function uploadMedia(file, currentUser, setLoading) {
-    const fileRef = ref(storage);
+    const fileRef = ref(storage, "tweetMedia/" +uniqid() + ".png");
 
     const metadata = {
         contentType: 'image/jpeg',

@@ -14,9 +14,14 @@ export const Feed = () => {
         tweetServices.getAll()
             .then(data => {
                 setTweets(data.docs.map((doc) => ({...doc.data(), id: doc.id})))
-                console.log(tweets)
+
             })
     }, [])
+
+    const updateTweets = async () => {
+        const data = await tweetServices.getAll();
+        setTweets(data.docs.map((doc) => ({...doc.data(), id: doc.id})))
+    }
 
     return (
         <main className={styles['main-feed']}>
@@ -24,11 +29,11 @@ export const Feed = () => {
                 <h2 className={styles['home-title']}>Home</h2>
             </header>
             {user
-                ? <ComposeTweet user={user} />
+                ? <ComposeTweet user={user} updateTweets={updateTweets}/>
                 : ""
             }
-            {console.log(tweets)}
-            {tweets.map((tweet) => (
+            {
+            (tweets.sort((a, b) => b.timestamp - a.timestamp)).map((tweet) => (
                 <Tweet
                     key={tweet.id}
                     {...tweet}

@@ -1,14 +1,11 @@
 import "./App.css"
 
 import { Routes, Route } from 'react-router-dom';
-import { auth } from "./firebase-config"
 
 import { Login } from './components/AuthForms/Login/Login';
 import { ProfileSetup } from './components/AuthForms/Register/ProfileSetup';
 import { Register } from './components/AuthForms/Register/Register';
 import { Home } from './components/Home/Home';
-import { useState } from "react";
-import { onAuthStateChanged } from "firebase/auth";
 import { AuthContext } from "./contexts/authContext";
 import { useAuth } from "./hooks/useAuth";
 
