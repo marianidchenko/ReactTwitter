@@ -1,5 +1,5 @@
 import { db, storage } from '../firebase-config';
-import { collection, getDocs, getDoc, addDoc, updateDoc, deleteDoc, doc, where, query } from 'firebase/firestore';
+import { collection, getDocs, getDoc, addDoc, updateDoc, deleteDoc, doc, where, query, documentId } from 'firebase/firestore';
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import uniqid from 'uniqid';
 
@@ -15,8 +15,8 @@ export const update = (id, updatedTweet) => {
 }
 
 export const remove = (id) => {
-    const tweetRef = getDoc(db, "tweets", id);
-    return deleteDoc(tweetRef);
+    const tweet = doc(db, "tweets/" + id);
+    deleteDoc(tweet)
 }
 
 export const getAll = () => {
@@ -31,16 +31,16 @@ export const getOne = (id) => {
 export const getByOwner = (uid) => {
     const q = query(tweetCollectionRef, where("ownerId", "==", uid));
     getDocs(q)
-        .then(docs => {console.log(docs)})
+        .then(docs => { console.log(docs) })
 }
 
 export async function uploadMedia(file, currentUser, setLoading) {
-    const fileRef = ref(storage, "tweetMedia/" +uniqid() + ".png");
+    const fileRef = ref(storage, "tweetMedia/" + uniqid() + ".png");
 
     const metadata = {
         contentType: 'image/jpeg',
         firebaseStorageDownloadTokens: currentUser.accessToken
-      };
+    };
 
     setLoading(true);
 

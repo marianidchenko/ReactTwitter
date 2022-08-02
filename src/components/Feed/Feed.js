@@ -1,22 +1,18 @@
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../contexts/authContext';
-import * as tweetServices from '../../services/tweetServices'
-
+import { TweetContext } from '../../contexts/TweetContext';
 import { ComposeTweet } from './ComposeTweet/ComposeTweet';
 import styles from './Feed.module.css'
 import { Tweet } from './Tweet/Tweet';
 
 export const Feed = () => {
     const { user } = useContext(AuthContext);
-    const [tweets, setTweets] = useState([])
+    const {updateTweets, tweets, setTweets} = useContext(TweetContext)
+    
     useEffect(() => {
         updateTweets()
     }, [])
 
-    const updateTweets = async () => {
-        const data = await tweetServices.getAll();
-        setTweets((data.docs.map((doc) => ({ ...doc.data(), id: doc.id }))).sort((a, b) => b.timestamp - a.timestamp))
-    }
 
     const refreshFeed = () => {
         updateTweets()
