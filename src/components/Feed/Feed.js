@@ -11,16 +11,12 @@ export const Feed = () => {
     const { user } = useContext(AuthContext);
     const [tweets, setTweets] = useState([])
     useEffect(() => {
-        tweetServices.getAll()
-            .then(data => {
-                setTweets(data.docs.map((doc) => ({...doc.data(), id: doc.id})))
-
-            })
+        updateTweets()
     }, [])
 
     const updateTweets = async () => {
         const data = await tweetServices.getAll();
-        setTweets(data.docs.map((doc) => ({...doc.data(), id: doc.id})))
+        setTweets((data.docs.map((doc) => ({...doc.data(), id: doc.id}))).sort((a, b) => b.timestamp - a.timestamp))
     }
 
     return (
@@ -33,7 +29,7 @@ export const Feed = () => {
                 : ""
             }
             {
-            (tweets.sort((a, b) => b.timestamp - a.timestamp)).map((tweet) => (
+            tweets.map((tweet) => (
                 <Tweet
                     key={tweet.id}
                     {...tweet}

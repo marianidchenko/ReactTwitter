@@ -13,12 +13,13 @@
 
 .compose-tweet .tweet-contents {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     flex-grow: 1;
 }
 
 
 .compose-tweet .tweet-text {
+    width: 90%;
     font-size: 18px;
     border: none;
     margin: 15px;
@@ -29,7 +30,7 @@
 }
 
 .compose-tweet .tweet-btn {
-    margin-left: auto;
+    margin-left: 10px;
     font-size: 14px;
     font-weight: 700;
     color: white;
@@ -39,7 +40,36 @@
     padding: 10px 20px;
 }
 
+.compose-tweet .tweet-btn:disabled {
+    background-color: var(--clr-font-gray);
+    pointer-events: none;
+}
+
 .compose-tweet .tweet-btn:hover {
     cursor: pointer;
     background-color: rgb(26, 138, 212);
+}
+
+.tweet-media-label {
+    margin-left: auto;
+    flex-basis: 10%;
+}
+
+.tweet-media-label i {
+    margin-top: 8px;
+    font-size: 20px;
+    color: var(--clr-font-gray);
+    position: relative;
+    left: 43px;
+}
+
+.tweet-media-label i:hover {
+    color: var(--clr-dark-gray);
+    cursor: pointer;
+}
+
+.compose-tweet .tweet-media {
+    margin-top: 8px;
+    width: 130px;
+    color: var(--clr-font-gray);
 }

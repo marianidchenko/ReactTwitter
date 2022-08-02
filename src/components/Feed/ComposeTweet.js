@@ -7,6 +7,7 @@ export const ComposeTweet = ({ user, updateTweets }) => {
     const [tweetText, setTweetText] = useState("");
     const [loading, setLoading] = useState(false);
     const [media, setMedia] = useState(null);
+    const [upload, setUpload] = useState(null);
 
     const onTextChange = (e) => {
         setTweetText(e.target.value)
@@ -14,8 +15,7 @@ export const ComposeTweet = ({ user, updateTweets }) => {
 
     const onMediaSelect = (e) => {
         if (e.target.files[0] && user) {
-            console.log(e.target.files[0])
-            setMedia(e.target.files[0])
+            setUpload(e.target.files[0])
         }
     }
 
@@ -23,7 +23,7 @@ export const ComposeTweet = ({ user, updateTweets }) => {
     const onSubmit = async (e) => {
         e.preventDefault();
         let tweet;
-        tweetServices.uploadMedia(media, user, setLoading)
+        tweetServices.uploadMedia(upload, user, setLoading)
             .then(mediaURL => {
                 tweet = {
                     mediaURL,
@@ -43,7 +43,8 @@ export const ComposeTweet = ({ user, updateTweets }) => {
                 }
             })
         setTweetText("");
-        
+        setMedia("");
+        setUpload(null);
     }
 
     return (
@@ -61,8 +62,8 @@ export const ComposeTweet = ({ user, updateTweets }) => {
                     value={tweetText}
                     onChange={onTextChange}
                 />
-                <label htmlFor='tweet-media'><i className="fa-solid fa-image"></i></label>
-                <input id="tweet-media" type="file" className={styles['tweet-media']} onChange={onMediaSelect} />
+                <label className={styles['tweet-media-label']} htmlFor='tweet-media'><i className="fa-solid fa-image"></i></label>
+                <input id="tweet-media" type="file" className={styles['tweet-media']} onChange={onMediaSelect} value={media}/>
                 <input type="submit" value="Tweet" disabled={loading} className={styles['tweet-btn']} />
             </form>
         </div>
