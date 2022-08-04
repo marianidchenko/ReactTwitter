@@ -12,8 +12,8 @@ export const DeleteTweet = ({ alert, setAlert, id}) => {
     if (alert) {
         return (
             <div className={styles["alert-container"]}>
-                <h1 className={styles["alert-question"]}>Would you really like to delete this post?</h1>
-                <button className={styles["alert-btn"]} onClick={onDelete}>Delete</button>
+                <h1 className={styles["alert-question"]}>Are you suure you want to delete this post?</h1>
+                <button className={styles["alert-btn", "delete-btn"]} onClick={onDelete}>Delete</button>
                 <button className={styles["alert-btn"]} onClick={() => setAlert(!alert)}>Cancel</button>
             </div>
         )
