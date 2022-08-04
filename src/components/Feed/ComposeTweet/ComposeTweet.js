@@ -34,15 +34,17 @@ export const ComposeTweet = ({ user, updateTweets }) => {
             tweetServices.uploadMedia(upload, user, setLoading)
                 .then(mediaURL => {
                     tweet['mediaURL'] = mediaURL;
+                    tweetServices.add(tweet)
+                    updateTweets();
                 })
-        }
+        } else {
+            try {
+                tweetServices.add(tweet)
+                updateTweets();
 
-        try {
-            tweetServices.add(tweet)
-            updateTweets();
-
-        } catch (error) {
-            console.log(error);
+            } catch (error) {
+                console.log(error);
+            }
         }
 
         setTweetText("");

@@ -1,14 +1,21 @@
 .edit-form {
     display: flex;
     margin-top: 10px;
+    flex-wrap: wrap;
 }
 .edit-text {
     border: none;
     background-color: rgb(255,255,255, 0.5);
     font-size: 15px;
     flex-grow: 1;
-    border-radius: 22px 0 0 22px;
+    border-radius: 22px;
     padding: 10px;
+}
+
+.tweet-media {
+    border-radius: 22px;
+    width: 100%;
+    margin-top: 20px;
 }
 
 .edit-text:focus {
@@ -19,8 +26,9 @@
 .edit-btn {
     padding: 10px 15px;
     font-size: 15px;
-    border-radius: 0 22px 22px 0;
+    border-radius: 22px;
     margin-left: auto;
+    margin-top: 20px;
     color: var(--clr-dark-gray);
     background-color: white;
     border: none;
@@ -30,4 +38,13 @@
 .edit-btn:hover {
     background-color: var(--clr-medium-gray);
     cursor: pointer;
+}
+
+.tweet-media-label {
+    margin-top: 20px;
+}
+
+.tweet-media-input {
+    margin-top: 20px;
+    width: 60%;
 }

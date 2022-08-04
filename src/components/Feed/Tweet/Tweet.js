@@ -9,6 +9,7 @@ export const Tweet = (props) => {
     const [alert, setAlert] = useState(false);
     const [edit, setEdit] = useState(false);
     const [tweetText, setTweetText] = useState(props.tweetText);
+    const [mediaURL, setMediaURL] = useState(props.mediaURL);
     const { user } = useContext(AuthContext);
 
     const onToggleOptions = (e) => {
@@ -43,17 +44,23 @@ export const Tweet = (props) => {
                         ?
                         <p className={styles['tweet-text']}>
                             {tweetText}
+                            {props.mediaURL
+                                ? <img
+                                    src={mediaURL}
+                                    alt=""
+                                    className={styles["tweet-media"]} />
+                                : ""
+                            }
                         </p>
-                        : <EditTweet id={props.id} tweetText={tweetText} setTweetText={setTweetText} setEdit={setEdit}/>
+                        : <EditTweet
+                            id={props.id}
+                            tweetText={tweetText} setTweetText={setTweetText}
+                            setEdit={setEdit}
+                            mediaURL={mediaURL} setMediaURL={setMediaURL}
+                        />
                     }
 
-                    {props.mediaURL
-                        ? <img
-                            src={props.mediaURL}
-                            alt=""
-                            className={styles["tweet-media"]} />
-                        : ""
-                    }
+
                 </article>
                 {user &&
                     <div className={styles["interaction-menu"]}>
