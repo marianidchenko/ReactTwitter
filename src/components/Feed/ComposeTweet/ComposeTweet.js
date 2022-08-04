@@ -22,26 +22,29 @@ export const ComposeTweet = ({ user, updateTweets }) => {
 
     const onSubmit = async (e) => {
         e.preventDefault();
-        let tweet;
-        tweetServices.uploadMedia(upload, user, setLoading)
-            .then(mediaURL => {
-                tweet = {
-                    mediaURL,
-                    displayName,
-                    username,
-                    "photoURL": user.photoURL,
-                    tweetText,
-                    timestamp: new Date().getTime()/1000,
-                    ownerId: user.uid
-                }
-                try {
-                    tweetServices.add(tweet)
-                    updateTweets();
-                    
-                } catch (error) {
-                    console.log(error);
-                }
-            })
+        let tweet = {
+            displayName,
+            username,
+            "photoURL": user.photoURL,
+            tweetText,
+            timestamp: new Date().getTime() / 1000,
+            ownerId: user.uid
+        };
+        if (upload) {
+            tweetServices.uploadMedia(upload, user, setLoading)
+                .then(mediaURL => {
+                    tweet['mediaURL'] = mediaURL;
+                })
+        }
+
+        try {
+            tweetServices.add(tweet)
+            updateTweets();
+
+        } catch (error) {
+            console.log(error);
+        }
+
         setTweetText("");
         setMedia("");
         setUpload(null);
@@ -63,7 +66,7 @@ export const ComposeTweet = ({ user, updateTweets }) => {
                     onChange={onTextChange}
                 />
                 <label className={styles['tweet-media-label']} htmlFor='tweet-media'><i className="fa-solid fa-image"></i></label>
-                <input id="tweet-media" type="file" className={styles['tweet-media']} onChange={onMediaSelect} value={media}/>
+                <input id="tweet-media" type="file" className={styles['tweet-media']} onChange={onMediaSelect} value={media} />
                 <input type="submit" value="Tweet" disabled={loading} className={styles['tweet-btn']} />
             </form>
         </div>
