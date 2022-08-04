@@ -9,7 +9,7 @@ export const EditTweet = ({ id, tweetText, mediaURL, setTweetText, setMediaURL, 
         const formData = new FormData(e.target);
         const newText = formData.get('tweet-text');
         const newMedia = formData.get('tweet-media-input');
-        if (newMedia.size > 0) {
+        if (newMedia?.size > 0) {
             tweetServices.uploadMedia(newMedia, user, () => { })
                 .then(resultURL => {
                     setMediaURL(resultURL);
@@ -21,7 +21,6 @@ export const EditTweet = ({ id, tweetText, mediaURL, setTweetText, setMediaURL, 
         } else {
             tweetServices.update(id, {
                 "tweetText": newText,
-                "mediaURL": mediaURL,
             });
         }
         setTweetText(newText);
