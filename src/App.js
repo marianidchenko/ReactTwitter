@@ -25,7 +25,7 @@ function App() {
 }
 
   return (
-    <AuthContext.Provider value={{ user, }}>
+    <AuthContext.Provider value={{ user }}>
       <TweetContext.Provider value={{updateTweets, tweets, setTweets}}> 
       <div className="container">
         <Routes>

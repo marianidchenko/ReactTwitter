@@ -2,7 +2,9 @@ import styles from './UserSection.module.css'
 import * as authService from "../../../services/authServices"
 import { useState } from 'react';
 import { getByOwner } from '../../../services/tweetServices';
+import { useNavigate } from 'react-router-dom';
 export const UserSection = ({ user }) => {
+    const navigate = useNavigate();
     const [displayName, username] = user.displayName.split('/');
     const [showOptions, setShowOptions] = useState(false)
     const onClick = () => setShowOptions(!showOptions)
@@ -20,7 +22,7 @@ export const UserSection = ({ user }) => {
             </div>
             <i className="fa-solid fa-ellipsis" />
             {showOptions && 
-            <div className={styles["profile-card-menu"]}>
+            <div className={styles["profile-card-menu"]} onClick={()=>{navigate(`/${username}`)}}>
                 <article className={styles["menu-profile-section"]}>
                     <img
                         src={user.photoURL}

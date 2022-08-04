@@ -1,8 +1,11 @@
-import { Fragment } from 'react'
+import { Fragment, useContext } from 'react'
 import { Link } from 'react-router-dom'
+import { AuthContext } from '../../../contexts/authContext';
 import styles from './Navigation.module.css'
 
-export const Navigation = ({ user }) => {
+export const Navigation = () => {
+    const { user } = useContext(AuthContext);
+
     return (
         <ul className={styles["menu"]}>
             <li className={styles["menu-logo"]}>
@@ -49,7 +52,7 @@ export const Navigation = ({ user }) => {
                         </Link>
                     </li>
                     <li className={styles["menu-items"]}>
-                        <Link to="" className={styles["menu-Link"]}>
+                        <Link to={`/${user.displayName.split("/")[1]}`} className={styles["menu-Link"]}>
                             <i className="fa-solid fa-user" />
                             <p>Profile</p>
                         </Link>
@@ -62,11 +65,11 @@ export const Navigation = ({ user }) => {
                     </li>
                 </Fragment>
                 : <li className={styles["menu-items"]}>
-                <Link to="/login" className={styles["menu-Link"]}>
-                    <i className="fa-solid fa-user" />
-                    <p>Sign In</p>
-                </Link>
-            </li>
+                    <Link to="/login" className={styles["menu-Link"]}>
+                        <i className="fa-solid fa-user" />
+                        <p>Sign In</p>
+                    </Link>
+                </li>
             }
         </ul>
     )

@@ -16,7 +16,7 @@ export const LeftSidebar = () => {
                 ? <Fragment>
                     <button className={styles["sidebar-tweet"]}>Tweet</button>
                     <button className={styles["sidebar-tweet-compact"]}><i className="fa-solid fa-feather-pointed"></i></button>
-                    <UserSection user={user} />
+                    <UserSection user={user}/>
                 </Fragment>
                 : ""
             }
