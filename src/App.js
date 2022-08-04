@@ -11,6 +11,7 @@ import { AuthContext } from "./contexts/authContext";
 import { useAuth } from "./hooks/useAuth";
 import { useState } from "react";
 import { TweetContext } from "./contexts/TweetContext";
+import { Profile } from "./components/Profile/Profile";
 
 function App() {
 
@@ -32,6 +33,7 @@ function App() {
           <Route path="/register" component={Register} element={<Register />} />
           <Route path="/profile-setup" component={ProfileSetup} element={<ProfileSetup />} />
           <Route path="/" component={Home} element={<Home />} />
+          <Route path="/:username" component={Profile} element={<Profile />}/>
         </Routes>
       </div>
       </TweetContext.Provider>
