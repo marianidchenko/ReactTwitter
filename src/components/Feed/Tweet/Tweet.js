@@ -18,12 +18,14 @@ export const Tweet = (props) => {
     }
 
     const deleteHandler = (e) => {
-        setAlert(!alert);
+        setAlert(true);
+        setEdit(false);
         setTweetControl(!tweetControl);
     }
 
     const editHandler = (e) => {
         setTweetControl(!tweetControl);
+        setAlert(false);
         setEdit(true);
     }
 
