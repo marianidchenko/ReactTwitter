@@ -68,7 +68,7 @@
     cursor: pointer;
 }
 
-.compose-tweet .tweet-media {
+.compose-tweet .tweet-media-input {
     margin-top: 8px;
     width: 130px;
     color: var(--clr-font-gray);
