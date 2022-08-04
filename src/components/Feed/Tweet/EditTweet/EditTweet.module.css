@@ -1,0 +1,33 @@
+.edit-form {
+    display: flex;
+    margin-top: 10px;
+}
+.edit-text {
+    border: none;
+    background-color: rgb(255,255,255, 0.5);
+    font-size: 15px;
+    flex-grow: 1;
+    border-radius: 22px 0 0 22px;
+    padding: 10px;
+}
+
+.edit-text:focus {
+    outline: none;
+    background-color: rgb(255,255,255);
+}
+
+.edit-btn {
+    padding: 10px 15px;
+    font-size: 15px;
+    border-radius: 0 22px 22px 0;
+    margin-left: auto;
+    color: var(--clr-dark-gray);
+    background-color: white;
+    border: none;
+}
+
+
+.edit-btn:hover {
+    background-color: var(--clr-medium-gray);
+    cursor: pointer;
+}

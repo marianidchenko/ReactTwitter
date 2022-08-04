@@ -10,13 +10,13 @@ export const add = (newTweet) => {
 }
 
 export const update = (id, updatedTweet) => {
-    const tweetRef = getDoc(db, "tweets", id);
+    const tweetRef = doc(db, "tweets/" + id);
     return updateDoc(tweetRef, updatedTweet);
 }
 
 export const remove = (id) => {
-    const tweet = doc(db, "tweets/" + id);
-    deleteDoc(tweet)
+    const tweetRef = doc(db, "tweets/" + id);
+    deleteDoc(tweetRef)
 }
 
 export const getAll = () => {

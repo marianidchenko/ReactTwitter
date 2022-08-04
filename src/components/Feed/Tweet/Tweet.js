@@ -1,11 +1,14 @@
 import { Fragment, useContext, useEffect, useState } from 'react'
 import { AuthContext } from '../../../contexts/authContext';
-import { DeleteTweet } from './DeleteTweet';
+import { DeleteTweet } from './DeleteTweet/DeleteTweet';
+import { EditTweet } from './EditTweet/EditTweet';
 import styles from './Tweet.module.css'
 export const Tweet = (props) => {
     const [currentUsername, setCurrentUsername] = useState("")
     const [tweetControl, setTweetControl] = useState(false);
     const [alert, setAlert] = useState(false);
+    const [edit, setEdit] = useState(false);
+    const [tweetText, setTweetText] = useState(props.tweetText);
     const { user } = useContext(AuthContext);
 
     const onToggleOptions = (e) => {
@@ -16,6 +19,10 @@ export const Tweet = (props) => {
     const deleteHandler = (e) => {
         setAlert(!alert);
         setTweetControl(!tweetControl);
+    }
+
+    const editHandler = (e) => {
+        setEdit(true);
     }
 
     useEffect(() => {
@@ -32,9 +39,14 @@ export const Tweet = (props) => {
                 <article className={styles['tweet-contents']}>
                     <h3 className={styles["tweet-name"]}>{props.displayName}</h3>
                     <p className={styles["tweet-username"]}>@{props.username}</p>
-                    <p className={styles['tweet-text']}>
-                        {props.tweetText}
-                    </p>
+                    {!edit
+                        ?
+                        <p className={styles['tweet-text']}>
+                            {tweetText}
+                        </p>
+                        : <EditTweet id={props.id} tweetText={tweetText} setTweetText={setTweetText} setEdit={setEdit}/>
+                    }
+
                     {props.mediaURL
                         ? <img
                             src={props.mediaURL}
@@ -67,7 +79,7 @@ export const Tweet = (props) => {
                 <div className={styles["interaction-container"]}>
                     {tweetControl &&
                         <div className={styles["tweet-card-menu"]}>
-                            <button className={styles["btn"]}>
+                            <button className={styles["btn"]} onClick={editHandler}>
                                 Edit Post
                             </button>
                             <button className={styles["btn"]} onClick={deleteHandler}>
@@ -75,8 +87,8 @@ export const Tweet = (props) => {
                             </button>
                         </div>
                     }
-                    <DeleteTweet alert={alert} setAlert={setAlert} id={props.id}/>
-                    
+                    <DeleteTweet alert={alert} setAlert={setAlert} id={props.id} />
+
                 </div>
             </div>
 
