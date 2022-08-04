@@ -23,6 +23,7 @@ export const Tweet = (props) => {
     }
 
     const editHandler = (e) => {
+        setTweetControl(!tweetControl);
         setEdit(true);
     }
 
