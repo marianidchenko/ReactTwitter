@@ -5,7 +5,7 @@ import styles from './ComposeTweet.module.css'
 export const ComposeTweet = ({ user, updateTweets }) => {
     const [displayName, username] = user.displayName.split('/');
     const [tweetText, setTweetText] = useState("");
-    const [loading, setLoading] = useState("");
+    const [incomplete, setIncomplete] = useState("");
     const [media, setMedia] = useState("");
     const [upload, setUpload] = useState(null);
 
@@ -32,7 +32,7 @@ export const ComposeTweet = ({ user, updateTweets }) => {
             ownerId: user.uid
         };
         if (upload) {
-            tweetServices.uploadMedia(upload, user, setLoading)
+            tweetServices.uploadMedia(upload, user, setIncomplete)
                 .then(mediaURL => {
                     tweet['mediaURL'] = mediaURL;
                     tweetServices.add(tweet)
@@ -60,7 +60,7 @@ export const ComposeTweet = ({ user, updateTweets }) => {
                 alt={""}
                 className={styles['profile-photo']}
             />
-            <form className={styles['tweet-contents']} onSubmit={onSubmit}>
+            <form className={styles['tweet-contents']} onSubmit={onSubmit} onBlur={() => incomplete(true)}>
                 <input
                     type="text"
                     placeholder="What's happening?"
@@ -70,7 +70,7 @@ export const ComposeTweet = ({ user, updateTweets }) => {
                 />
                 <label className={styles['tweet-media-label']} htmlFor='tweet-media'><i className="fa-solid fa-image"></i></label>
                 <input id="tweet-media" type="file" className={styles['tweet-media-input']} onChange={onMediaSelect} value={media}/>
-                <input type="submit" value="Tweet" disabled={loading} className={styles['tweet-btn']} />
+                <input type="submit" value="Tweet" disabled={incomplete} className={styles['tweet-btn']} />
             </form>
         </div>
     )

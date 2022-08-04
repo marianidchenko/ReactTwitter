@@ -30,7 +30,7 @@
 }
 
 .compose-tweet .tweet-btn {
-    margin-left: 10px;
+    margin-left: 5px;
     font-size: 14px;
     font-weight: 700;
     color: white;
@@ -70,9 +70,10 @@
 
 .compose-tweet .tweet-media-input {
     margin-top: 8px;
-    width: 130px;
+    width: 110px;
     color: var(--clr-font-gray);
 }
+
 
 input[type=file]::-webkit-file-upload-button {
     width: 0px;
