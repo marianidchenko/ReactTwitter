@@ -1,4 +1,5 @@
 import { Fragment, useContext, useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/authContext';
 import { DeleteTweet } from './DeleteTweet/DeleteTweet';
 import { EditTweet } from './EditTweet/EditTweet';
@@ -11,6 +12,7 @@ export const Tweet = (props) => {
     const [tweetText, setTweetText] = useState(props.tweetText);
     const [mediaURL, setMediaURL] = useState(props.mediaURL);
     const { user } = useContext(AuthContext);
+    const navigate = useNavigate();
 
     const onToggleOptions = (e) => {
         e.preventDefault();
@@ -38,8 +40,7 @@ export const Tweet = (props) => {
     return (
         <Fragment>
             <div className={styles["tweet"]}>
-                <img src={props.photoURL} alt="" className={styles["tweet-profile-photo"]} />
-
+                <img src={props.photoURL} alt="" className={styles["tweet-profile-photo"]} onClick={()=>{navigate("/" + props.username)}}/>
                 <article className={styles['tweet-contents']}>
                     <h3 className={styles["tweet-name"]}>{props.displayName}</h3>
                     <p className={styles["tweet-username"]}>@{props.username}</p>

@@ -3,6 +3,7 @@ import { useContext, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { AuthContext } from "../../../contexts/authContext"
 import { upload } from '../../../services/profilePhotoServices'
+import * as profileService from "../../../services/profileService"
 import "../form.css"
 
 export const ProfileSetup = () => {
@@ -19,6 +20,7 @@ export const ProfileSetup = () => {
     const handleClick = (e) => {
         e.preventDefault()
         upload(photo, user, setLoading)
+            .then(photoURL => { setPhoto(photoURL) })
     }
 
     const onSubmit = (e) => {
@@ -29,8 +31,13 @@ export const ProfileSetup = () => {
         } = Object.fromEntries(new FormData(e.target));
         updateProfile(user, {
             displayName: displayName + '/' + username,
-
         }).then(() => {
+            profileService.add({
+                "displayName": displayName,
+                "username": username,
+                "photoURL": photo,
+                "creationTime": user.metadata.creationTime,
+            })
             navigate('/');
         }).catch((error) => console.log(error));
     };

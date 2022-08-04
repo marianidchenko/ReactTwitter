@@ -60,7 +60,7 @@ export const ComposeTweet = ({ user, updateTweets }) => {
                 alt={""}
                 className={styles['profile-photo']}
             />
-            <form className={styles['tweet-contents']} onSubmit={onSubmit} onBlur={() => incomplete(true)}>
+            <form className={styles['tweet-contents']} onSubmit={onSubmit} onBlur={() => setIncomplete(true)}>
                 <input
                     type="text"
                     placeholder="What's happening?"
