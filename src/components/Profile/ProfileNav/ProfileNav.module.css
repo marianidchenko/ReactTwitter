@@ -7,7 +7,8 @@
     box-sizing: border-box;
     display: flex;
     width: 100%;
-
+    display: flex;
+    justify-content: space-between; 
 }
 
 .profile-nav .profile-link {
@@ -22,4 +23,9 @@
 .profile-nav .profile-link:hover {
     background-color: var(--clr-hover-gray);
     cursor: pointer;
+}
+
+.display-tweet-container {
+    padding: 20px;
+    margin-top: 20px;
 }

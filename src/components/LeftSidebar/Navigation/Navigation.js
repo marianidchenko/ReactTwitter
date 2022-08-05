@@ -1,7 +1,7 @@
 import { Fragment, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { AuthContext } from '../../../contexts/authContext';
-import { ComposeTweetPopup } from '../../Feed/ComposeTweet/ComposeTweetPopup';
+import { ComposeTweetPopup } from '../../Feed/Tweet/ComposeTweet/ComposeTweetPopup';
 import styles from './Navigation.module.css'
 
 export const Navigation = () => {

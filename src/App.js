@@ -13,7 +13,7 @@ import { useState } from "react";
 import { TweetContext } from "./contexts/TweetContext";
 import { Profile } from "./components/Profile/Profile";
 import { TweetDetails } from "./components/TweetDetails/TweetDetails";
-import { ComposeTweetPopup } from "./components/Feed/ComposeTweet/ComposeTweetPopup";
+import { ComposeTweetPopup } from "./components/Feed/Tweet/ComposeTweet/ComposeTweetPopup";
 
 function App() {
 

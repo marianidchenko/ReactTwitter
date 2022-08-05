@@ -7,8 +7,8 @@ import { Tweet } from './Tweet/Tweet';
 
 export const Feed = () => {
     const { user } = useContext(AuthContext);
-    const {updateTweets, tweets, setTweets} = useContext(TweetContext)
-    
+    const { updateTweets, tweets, setTweets } = useContext(TweetContext)
+
     useEffect(() => {
         updateTweets()
     }, [])
@@ -26,14 +26,14 @@ export const Feed = () => {
                 <h2 className={styles['home-title']} onClick={refreshFeed}>Home</h2>
             </header>
             {user
-                ? <ComposeTweet user={user} updateTweets={updateTweets} />
+                ? <ComposeTweet user={user} />
                 : ""
             }
             {
                 tweets.map((tweet) => (
                     <Tweet
                         key={tweet.id}
-                        tweet = {tweet}
+                        tweet={tweet}
                         updateTweets={updateTweets}
                     />
                 ))}

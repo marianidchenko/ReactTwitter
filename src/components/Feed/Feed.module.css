@@ -18,11 +18,3 @@
 }
 
 /* Compose Tweet */
-
-
-
-@media screen and (max-width: 1300px) {
-    .main-feed {
-        margin-left: 0
-    }
-}

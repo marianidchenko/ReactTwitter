@@ -31,8 +31,7 @@ export const getOne = (id) => {
 
 export const getByOwner = (uid) => {
     const q = query(tweetCollectionRef, where("ownerId", "==", uid));
-    getDocs(q)
-        .then(docs => { console.log(docs) })
+    return getDocs(q)
 }
 
 export const getReplies = (id) => {

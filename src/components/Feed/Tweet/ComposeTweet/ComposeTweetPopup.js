@@ -1,8 +1,8 @@
 import { Fragment, useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { AuthContext } from '../../../contexts/authContext'
-import { TweetContext } from '../../../contexts/TweetContext'
-import * as tweetServices from "../../../services/tweetServices"
+import { AuthContext } from '../../../../contexts/authContext'
+import { TweetContext } from '../../../../contexts/TweetContext'
+import * as tweetServices from "../../../../services/tweetServices"
 import styles from './ComposeTweetPopup.module.css'
 
 export const ComposeTweetPopup = () => {

@@ -1,24 +1,24 @@
 import { Fragment, useContext } from "react"
 import styles from "./ProfileCard.module.css";
 import { Link } from "react-router-dom";
-import { ProfileNav } from "../ProfileNav/ProfileNav";
 import { AuthContext } from "../../../contexts/authContext";
 
 
-export const ProfileCard = ({ profile }) => {
+
+export const ProfileCard = ({ profile, tweetCount }) => {
     const { user } = useContext(AuthContext)
     const re = /[A-Za-z]{3} \d{4}/
     const creationTime = (re.exec(profile.creationTime))[0];
 
     return (
-        <div className={styles["profile-page"]}>
+        <Fragment>
             <header className={styles["profile-header"]}>
                 <Link to="/" className={styles["nav-back"]}>
                     <i className="fa-solid fa-arrow-left" />
                 </Link>
                 <div className={styles["profile-info"]}>
                     <h2 className={styles["profile-title"]}>{profile.displayName}</h2>
-                    <p className={styles["tweet-count"]}>0 Tweets</p>
+                    <p className={styles["tweet-count"]}>{tweetCount} Tweets</p>
                 </div>
             </header>
             <div className={styles["profile-card"]}>
@@ -52,9 +52,8 @@ export const ProfileCard = ({ profile }) => {
                             <b className={styles["follower-count"]}>0</b> Followers
                         </p>
                     </div>
-                    <ProfileNav />
                 </article>
             </div>
-        </div>
+        </Fragment>
     )
 }

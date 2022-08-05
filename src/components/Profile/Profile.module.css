@@ -1,0 +1,7 @@
+.profile-page {
+    display: flex;
+    flex-direction: column;
+    width: 600px;
+    flex-grow: 1;
+    margin: 0 30px;
+}
