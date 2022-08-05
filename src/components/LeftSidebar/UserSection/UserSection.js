@@ -22,14 +22,14 @@ export const UserSection = ({ user }) => {
             </div>
             <i className="fa-solid fa-ellipsis" />
             {showOptions && 
-            <div className={styles["profile-card-menu"]} onClick={()=>{navigate(`/${username}`)}}>
+            <div className={styles["profile-card-menu"]}>
                 <article className={styles["menu-profile-section"]}>
                     <img
                         src={user.photoURL}
                         alt=""
                         className={styles["profile-photo"]}
                     />
-                    <div className={styles["menu-profile-info"]}>
+                    <div className={styles["menu-profile-info"]} onClick={()=>{navigate(`/${username}`)}}>
                         <h3 className={styles["menu-profile-name"]}>{displayName}</h3>
                         <p className={styles["menu-profile-handle"]}>@{username}</p>
                     </div>

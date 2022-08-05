@@ -1,23 +1,33 @@
 import { Fragment, useContext, useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/authContext';
 import { DeleteTweet } from './DeleteTweet/DeleteTweet';
 import { EditTweet } from './EditTweet/EditTweet';
+import { ReplyTweet } from './ReplyTweet/ReplyTweet';
 import styles from './Tweet.module.css'
-export const Tweet = (props) => {
+export const Tweet = ({ tweet, replies, setReplies }) => {
     const [currentUsername, setCurrentUsername] = useState("")
+
     const [tweetControl, setTweetControl] = useState(false);
     const [alert, setAlert] = useState(false);
     const [edit, setEdit] = useState(false);
-    const [tweetText, setTweetText] = useState(props.tweetText);
-    const [mediaURL, setMediaURL] = useState(props.mediaURL);
+    const [reply, setReply] = useState(false);
+
+    const [tweetText, setTweetText] = useState("");
+    const [mediaURL, setMediaURL] = useState("");
+
     const { user } = useContext(AuthContext);
     const navigate = useNavigate();
 
     const onToggleOptions = (e) => {
         e.preventDefault();
-        setTweetControl(!tweetControl)
+        setTweetControl(!tweetControl);
     }
+
+    const onToggleReply = (e) => {
+        setReply(!reply);
+    }
+
 
     const deleteHandler = (e) => {
         setAlert(true);
@@ -31,24 +41,33 @@ export const Tweet = (props) => {
         setEdit(true);
     }
 
+    const openDetails = () => {
+        if (!tweet.isReply) {
+            navigate(`/tweet/${tweet.id}`)
+        }
+    }
+
     useEffect(() => {
         if (user) {
-            setCurrentUsername(user.displayName.split("/")[1])
+            setCurrentUsername(user.displayName.split("/")[1]);
         }
+        setTweetText(tweet.tweetText);
+        setMediaURL(tweet.mediaURL);
+
     }, [user])
 
     return (
         <Fragment>
             <div className={styles["tweet"]}>
-                <img src={props.photoURL} alt="" className={styles["tweet-profile-photo"]} onClick={()=>{navigate("/" + props.username)}}/>
-                <article className={styles['tweet-contents']}>
-                    <h3 className={styles["tweet-name"]}>{props.displayName}</h3>
-                    <p className={styles["tweet-username"]}>@{props.username}</p>
+                <img src={tweet.photoURL} alt="" className={styles["tweet-profile-photo"]} onClick={() => { navigate("/" + tweet.username) }} />
+                <article className={styles['tweet-contents']} onClick={openDetails}>
+                    <h3 className={styles["tweet-name"]}>{tweet.displayName}</h3>
+                    <p className={styles["tweet-username"]}>@{tweet.username}</p>
                     {!edit
                         ?
                         <p className={styles['tweet-text']}>
                             {tweetText}
-                            {props.mediaURL
+                            {tweet.mediaURL
                                 ? <img
                                     src={mediaURL}
                                     alt=""
@@ -57,36 +76,40 @@ export const Tweet = (props) => {
                             }
                         </p>
                         : <EditTweet
-                            id={props.id}
+                            id={tweet.id}
                             tweetText={tweetText} setTweetText={setTweetText}
                             setEdit={setEdit}
                             mediaURL={mediaURL} setMediaURL={setMediaURL}
+                            replies={replies}
+                            setReplies={setReplies}
                         />
                     }
 
 
                 </article>
-                {user &&
-                    <div className={styles["interaction-menu"]}>
-                        <a href="" className={styles["interaction-btn"]}>
+                {user
+                    ? <div className={styles["interaction-menu"]}>
+                        <Link to="" className={styles["interaction-btn"]} onClick={onToggleReply}>
                             <i className="fa-solid fa-message" />
-                        </a>
-                        <a href="" className={styles["interaction-btn"]}>
+                        </Link>
+                        <Link to="" className={styles["interaction-btn"]}>
                             <i className="fa-solid fa-retweet" />
-                        </a>
-                        <a href="" className={styles["interaction-btn"]}>
+                        </Link>
+                        <Link to="" className={styles["interaction-btn"]}>
                             <i className="fa-solid fa-heart" />
-                        </a>
-                        <a href="" className={styles["interaction-btn"]}>
+                        </Link>
+                        <Link to="" className={styles["interaction-btn"]}>
                             <i className="fa-solid fa-arrow-up-from-bracket" />
-                        </a>
-                        {currentUsername == props.username &&
-                            <a href="" className={styles["interaction-btn"]} onClick={onToggleOptions}>
+                        </Link>
+                        {currentUsername == tweet.username &&
+                            <Link to="" className={styles["interaction-btn"]} onClick={onToggleOptions}>
                                 <i className="fa-solid fa-ellipsis" />
-                            </a>
+                            </Link>
                         }
                     </div>
+                    : ""
                 }
+                {reply && <ReplyTweet id={tweet.id} setReply={setReply} replies={replies} setReplies={setReplies} />}
                 <div className={styles["interaction-container"]}>
                     {tweetControl &&
                         <div className={styles["tweet-card-menu"]}>
@@ -98,7 +121,7 @@ export const Tweet = (props) => {
                             </button>
                         </div>
                     }
-                    <DeleteTweet alert={alert} setAlert={setAlert} id={props.id} />
+                    <DeleteTweet alert={alert} setAlert={setAlert} id={tweet.id} replies={replies} setReplies={setReplies} />
 
                 </div>
             </div>

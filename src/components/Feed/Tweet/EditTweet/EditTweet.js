@@ -3,7 +3,7 @@ import * as tweetServices from "../../../../services/tweetServices"
 import { Fragment, useContext } from "react";
 import { AuthContext } from "../../../../contexts/authContext";
 export const EditTweet = ({ id, tweetText, mediaURL, setTweetText, setMediaURL, setEdit }) => {
-    const { user } = useContext(AuthContext);
+    const { user, replies, setReplies } = useContext(AuthContext);
     const onSubmit = (e) => {
         e.preventDefault();
         const formData = new FormData(e.target);

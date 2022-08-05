@@ -2,6 +2,9 @@
     display: flex;
     border: 1px solid var(--clr-light-gray);
     padding: 15px;
+    background-color: white;
+    border-radius: 20px;
+    margin: 10px;
 }
 
 .compose-tweet .profile-photo {

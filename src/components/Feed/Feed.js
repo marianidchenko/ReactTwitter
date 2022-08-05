@@ -33,7 +33,7 @@ export const Feed = () => {
                 tweets.map((tweet) => (
                     <Tweet
                         key={tweet.id}
-                        {...tweet}
+                        tweet = {tweet}
                         updateTweets={updateTweets}
                     />
                 ))}

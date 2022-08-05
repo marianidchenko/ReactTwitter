@@ -33,7 +33,7 @@ export const ProfileCard = ({ profile }) => {
                         alt=""
                         className={styles["profile-photo"]}
                     />
-                    {profile.username == user.displayName.split("/")[1]
+                    {profile.username == user?.displayName.split("/")[1]
                         ? <button className={styles["edit-profile-btn"]}>Edit profile</button>
                         : <button className={styles["edit-profile-btn"]}>Follow</button>
                     }

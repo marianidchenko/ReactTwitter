@@ -1,12 +1,12 @@
 import { db, storage } from '../firebase-config';
-import { collection, getDocs, getDoc, addDoc, updateDoc, deleteDoc, doc, where, query, documentId } from 'firebase/firestore';
+import { collection, getDocs, getDoc, addDoc, updateDoc, deleteDoc, doc, where, query, documentId, arrayUnion } from 'firebase/firestore';
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import uniqid from 'uniqid';
 
 const tweetCollectionRef = collection(db, "tweets");
 
 export const add = (newTweet) => {
-    addDoc(tweetCollectionRef, newTweet);
+    return addDoc(tweetCollectionRef, newTweet);
 }
 
 export const update = (id, updatedTweet) => {
@@ -14,9 +14,16 @@ export const update = (id, updatedTweet) => {
     return updateDoc(tweetRef, updatedTweet);
 }
 
+export const addReply = (id, newReply) => {
+    const tweetRef = doc(db, "tweets/" + id);
+    return updateDoc(tweetRef, {
+        replies: arrayUnion(newReply)
+    });
+}
+
 export const remove = (id) => {
     const tweetRef = doc(db, "tweets/" + id);
-    deleteDoc(tweetRef)
+    return deleteDoc(tweetRef);
 }
 
 export const getAll = () => {
@@ -24,14 +31,20 @@ export const getAll = () => {
 }
 
 export const getOne = (id) => {
-    const tweetRef = doc(db, "tweets", id);
-    return getDoc(tweetRef);
+    const tweetRef = doc(db, "tweets/" + id);
+    const docSnap =  getDoc(tweetRef);
+    return docSnap;
 }
 
 export const getByOwner = (uid) => {
     const q = query(tweetCollectionRef, where("ownerId", "==", uid));
     getDocs(q)
         .then(docs => { console.log(docs) })
+}
+
+export const getReplies = (id) => {
+    const q = query(tweetCollectionRef, where("replyTo", "==", id));
+    return getDocs(q)
 }
 
 export async function uploadMedia(file, currentUser, setLoading) {

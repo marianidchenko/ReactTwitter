@@ -1,11 +1,9 @@
 import { useContext, useState } from 'react'
-import { AuthContext } from '../../../contexts/authContext'
-import { TweetContext } from '../../../contexts/TweetContext'
-import * as tweetServices from "../../../services/tweetServices"
-import styles from './ComposeTweet.module.css'
+import { AuthContext } from '../../../../contexts/authContext'
+import * as tweetServices from "../../../../services/tweetServices"
+import styles from './ReplyTweet.module.css'
 
-export const ComposeTweet = () => {
-    const { updateTweets } = useContext(TweetContext);
+export const ReplyTweet = ({ id, setReply, replies, setReplies }) => {
     const { user } = useContext(AuthContext);
 
     const [displayName, username] = user.displayName.split('/');
@@ -26,7 +24,6 @@ export const ComposeTweet = () => {
         }
     }
 
-
     const onSubmit = async (e) => {
         e.preventDefault();
         let tweet = {
@@ -35,28 +32,40 @@ export const ComposeTweet = () => {
             "photoURL": user.photoURL,
             tweetText,
             timestamp: new Date().getTime() / 1000,
-            ownerId: user.uid
+            ownerId: user.uid,
+            isReply: true,
+            replyTo: id,
         };
         if (upload) {
             tweetServices.uploadMedia(upload, user, setIncomplete)
                 .then(mediaURL => {
                     tweet['mediaURL'] = mediaURL;
-                    tweetServices.add(tweet)
-                    updateTweets();
+                    tweetServices.addReply(id, tweet)
+
                 })
         } else {
             try {
-                tweetServices.add(tweet);
-                updateTweets();
+                tweetServices.add(tweet)
+                    .then(snap => { 
+                        tweetServices.addReply(id, snap.id) 
+                        if (replies) {
+                            setReplies([...replies, tweet])
+                        } else {
+                            setReplies([tweet])
+                        }
+                    })
+
 
             } catch (error) {
                 console.log(error);
             }
+            setReply(false);
         }
 
         setTweetText("");
         setMedia("");
         setUpload(null);
+
     }
 
     return (
@@ -69,14 +78,14 @@ export const ComposeTweet = () => {
             <form className={styles['tweet-contents']} onSubmit={onSubmit} >
                 <input
                     type="text"
-                    placeholder="What's happening?"
+                    placeholder="Tweet your reply"
                     className={styles['tweet-text']}
                     value={tweetText}
                     onChange={onTextChange}
                 />
                 <label className={styles['tweet-media-label']} htmlFor='tweet-media'><i className="fa-solid fa-image"></i></label>
                 <input id="tweet-media" type="file" className={styles['tweet-media-input']} onChange={onMediaSelect} value={media} />
-                <input type="submit" value="Tweet" disabled={incomplete} className={styles['tweet-btn']} />
+                <input type="submit" value="Reply" disabled={incomplete} className={styles['tweet-btn']} />
             </form>
         </div>
     )

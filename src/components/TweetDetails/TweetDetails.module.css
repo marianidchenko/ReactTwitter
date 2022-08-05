@@ -1,0 +1,15 @@
+.detail-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 600px;
+    padding: 0 15px;
+}
+
+
+.reply-wrapper .tweet{
+    padding-left: 20px;
+}
+
+.no-replies {
+    text-align: center;
+}

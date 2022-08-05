@@ -3,11 +3,15 @@ import { TweetContext } from "../../../../contexts/TweetContext";
 import { remove } from "../../../../services/tweetServices";
 import styles from "./DeleteTweet.module.css";
 
-export const DeleteTweet = ({ alert, setAlert, id}) => {
+export const DeleteTweet = ({ alert, setAlert, id, replies, setReplies}) => {
     const {updateTweets} = useContext(TweetContext)
     const onDelete = () => {
-        remove(id);
-        updateTweets();
+        remove(id)
+        .then(snap => {
+            updateTweets();
+            setReplies(replies.filter(r => r.id !== id))
+        })
+        
     }
     if (alert) {
         return (
