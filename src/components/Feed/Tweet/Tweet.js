@@ -101,7 +101,7 @@ export const Tweet = ({ tweet, replies, setReplies }) => {
                             <i className="fa-solid fa-heart" />
                         </Link>
                         <Link to="" className={styles["interaction-btn"]}>
-                            <i className="fa-solid fa-arrow-up-from-bracket" />
+                            <i class="fa-solid fa-bookmark"></i>
                         </Link>
                         {currentUsername == tweet.username &&
                             <Link to="" className={styles["interaction-btn"]} onClick={onToggleOptions}>
