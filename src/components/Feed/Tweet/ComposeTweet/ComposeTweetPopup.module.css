@@ -1,8 +1,36 @@
+.during-popup {
+    position: fixed;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
+    z-index: 0;
+}
+
+.exit-btn i {
+    font-size: 14px;
+    padding: 10px;
+    border-radius: 52px;
+    margin-right: 10px;
+}
+
+.exit-btn i:hover {
+    background-color: var(--clr-hover-gray);
+    cursor: pointer;
+}
+
 .compose-tweet {
     display: flex;
     border: 1px solid var(--clr-light-gray);
-    padding: 15px;
+    padding: 20px;
+    border-radius: 22px;
+    background-color: white;
 }
+
 
 .compose-tweet .profile-photo {
     object-fit: cover;
@@ -27,7 +55,7 @@
 }
 
 .compose-tweet .tweet-text:focus {
-    outline: none; 
+    outline: none;
 }
 
 .compose-tweet .tweet-btn {

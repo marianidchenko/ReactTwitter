@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../contexts/authContext';
 import { TweetContext } from '../../contexts/TweetContext';
-import { ComposeTweet } from './ComposeTweet/ComposeTweet';
+import { ComposeTweet } from './Tweet/ComposeTweet/ComposeTweet';
 import styles from './Feed.module.css'
 import { Tweet } from './Tweet/Tweet';
 

@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react'
-import { AuthContext } from '../../../contexts/authContext'
-import { TweetContext } from '../../../contexts/TweetContext'
-import * as tweetServices from "../../../services/tweetServices"
+import { AuthContext } from '../../../../contexts/authContext'
+import { TweetContext } from '../../../../contexts/TweetContext'
+import * as tweetServices from "../../../../services/tweetServices"
 import styles from './ComposeTweet.module.css'
 
 export const ComposeTweet = () => {

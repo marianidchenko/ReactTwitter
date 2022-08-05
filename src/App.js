@@ -13,12 +13,14 @@ import { useState } from "react";
 import { TweetContext } from "./contexts/TweetContext";
 import { Profile } from "./components/Profile/Profile";
 import { TweetDetails } from "./components/TweetDetails/TweetDetails";
+import { ComposeTweetPopup } from "./components/Feed/ComposeTweet/ComposeTweetPopup";
 
 function App() {
 
   const user = useAuth();
 
-  const [tweets, setTweets] = useState([])
+  const [tweets, setTweets] = useState([]);
+  const [composePopup, setComposePopup] = useState(false);
 
   const updateTweets = async () => {
     const data = await tweetServices.getAll();
@@ -28,7 +30,7 @@ function App() {
 
   return (
     <AuthContext.Provider value={{ user }}>
-      <TweetContext.Provider value={{ updateTweets, tweets, setTweets }}>
+      <TweetContext.Provider value={{ updateTweets, tweets, setTweets, setComposePopup }}>
         <div className="container">
           <Routes>
             <Route path="/login" component={Login} element={<Login />} />
@@ -37,7 +39,9 @@ function App() {
             <Route path="/" component={Home} element={<Home />} />
             <Route path="/:username" component={Profile} element={<Profile />} />
             <Route path="/tweet/:id" component={TweetDetails} element={<TweetDetails />} />
+            <Route path="/compose" component={ComposeTweetPopup} element={<ComposeTweetPopup />} />
           </Routes>
+          {composePopup && <ComposeTweetPopup />}
         </div>
       </TweetContext.Provider>
     </AuthContext.Provider>

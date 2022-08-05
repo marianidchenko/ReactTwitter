@@ -65,7 +65,7 @@ export const Tweet = ({ tweet, replies, setReplies }) => {
                     {!edit
                         ?
                         <p className={styles['tweet-text']}>
-                            {tweet.isReply && "Replied: "}
+                            {tweet.isReply && <b className={styles["reply-tag"]}>Replied: </b>}
                             {tweetText}
                             {tweet.mediaURL
                                 ? <img
