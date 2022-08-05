@@ -59,12 +59,12 @@ export const Tweet = ({ tweet, replies, setReplies }) => {
         <Fragment>
             <div className={styles["tweet"]}>
                 <img src={tweet.photoURL} alt="" className={styles["tweet-profile-photo"]} onClick={() => { navigate("/" + tweet.username) }} />
-                <article className={styles['tweet-contents']} onClick={openDetails}>
+                <article className={styles['tweet-contents']}>
                     <h3 className={styles["tweet-name"]}>{tweet.displayName}</h3>
                     <p className={styles["tweet-username"]}>@{tweet.username}</p>
                     {!edit
                         ?
-                        <p className={styles['tweet-text']}>
+                        <p className={styles['tweet-text']} onClick={openDetails}>
                             {tweet.isReply && <b className={styles["reply-tag"]}>Replied: </b>}
                             {tweetText}
                             {tweet.mediaURL
