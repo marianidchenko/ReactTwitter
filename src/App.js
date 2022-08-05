@@ -23,7 +23,7 @@ function App() {
   const updateTweets = async () => {
     const data = await tweetServices.getAll();
     const tweetTemp = ((data.docs.map((doc) => ({ ...doc.data(), id: doc.id }))).sort((a, b) => b.timestamp - a.timestamp));
-    setTweets(tweetTemp.filter((tweet) => tweet.isReply == undefined))
+    setTweets(tweetTemp.filter((tweet) => tweet.isReply == false))
   }
 
   return (

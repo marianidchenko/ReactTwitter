@@ -1,14 +1,38 @@
-.detail-wrapper {
+.tweet-detail-page {
     display: flex;
     flex-direction: column;
     width: 600px;
     padding: 0 15px;
 }
 
-
-.reply-wrapper .tweet{
-    padding-left: 20px;
+.tweet-header {
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    border: 1px solid var(--clr-light-gray);
 }
+
+.tweet-title {
+    font-size: 20px;
+    color: var(--clr-font-dark);
+}
+
+.nav-back i {
+    font-size: 20px;
+    padding: 12px;
+    border-radius: 52px;
+}
+
+.nav-back i:hover {
+    background-color: var(--clr-hover-gray);
+}
+
+.reply-wrapper {
+    border-left: 2px solid var(--clr-medium-gray);
+}
+
 
 .no-replies {
     text-align: center;

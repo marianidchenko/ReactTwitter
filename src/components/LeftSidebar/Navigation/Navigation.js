@@ -57,12 +57,6 @@ export const Navigation = () => {
                             <p>Profile</p>
                         </Link>
                     </li>
-                    <li className={styles["menu-items"]}>
-                        <Link to="" className={styles["menu-Link"]}>
-                            <i className="fa-solid fa-circle-chevron-down" />
-                            <p>More</p>
-                        </Link>
-                    </li>
                 </Fragment>
                 : <li className={styles["menu-items"]}>
                     <Link to="/login" className={styles["menu-Link"]}>

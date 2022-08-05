@@ -14,13 +14,6 @@ export const update = (id, updatedTweet) => {
     return updateDoc(tweetRef, updatedTweet);
 }
 
-export const addReply = (id, newReply) => {
-    const tweetRef = doc(db, "tweets/" + id);
-    return updateDoc(tweetRef, {
-        replies: arrayUnion(newReply)
-    });
-}
-
 export const remove = (id) => {
     const tweetRef = doc(db, "tweets/" + id);
     return deleteDoc(tweetRef);

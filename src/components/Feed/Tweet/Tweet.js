@@ -41,10 +41,9 @@ export const Tweet = ({ tweet, replies, setReplies }) => {
         setEdit(true);
     }
 
-    const openDetails = () => {
-        if (!tweet.isReply) {
-            navigate(`/tweet/${tweet.id}`)
-        }
+    const openDetails = (e) => {
+        e.preventDefault();
+        navigate(`/tweet/${tweet.id}`);
     }
 
     useEffect(() => {
@@ -54,7 +53,7 @@ export const Tweet = ({ tweet, replies, setReplies }) => {
         setTweetText(tweet.tweetText);
         setMediaURL(tweet.mediaURL);
 
-    }, [user])
+    }, [user, tweet])
 
     return (
         <Fragment>
@@ -66,6 +65,7 @@ export const Tweet = ({ tweet, replies, setReplies }) => {
                     {!edit
                         ?
                         <p className={styles['tweet-text']}>
+                            {tweet.isReply && "Replied: "}
                             {tweetText}
                             {tweet.mediaURL
                                 ? <img
@@ -89,9 +89,11 @@ export const Tweet = ({ tweet, replies, setReplies }) => {
                 </article>
                 {user
                     ? <div className={styles["interaction-menu"]}>
-                        <Link to="" className={styles["interaction-btn"]} onClick={onToggleReply}>
-                            <i className="fa-solid fa-message" />
-                        </Link>
+                        {!tweet.isReply &&
+                            <Link to="" className={styles["interaction-btn"]} onClick={onToggleReply}>
+                                <i className="fa-solid fa-message" />
+                            </Link>
+                        }
                         <Link to="" className={styles["interaction-btn"]}>
                             <i className="fa-solid fa-retweet" />
                         </Link>

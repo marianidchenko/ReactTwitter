@@ -40,14 +40,19 @@ export const ReplyTweet = ({ id, setReply, replies, setReplies }) => {
             tweetServices.uploadMedia(upload, user, setIncomplete)
                 .then(mediaURL => {
                     tweet['mediaURL'] = mediaURL;
-                    tweetServices.addReply(id, tweet)
-
+                    tweetServices.add(tweet)
+                        .then(snap => {
+                            if (replies) {
+                                setReplies([...replies, tweet])
+                            } else {
+                                setReplies([tweet])
+                            }
+                        })
                 })
         } else {
             try {
                 tweetServices.add(tweet)
-                    .then(snap => { 
-                        tweetServices.addReply(id, snap.id) 
+                    .then(snap => {
                         if (replies) {
                             setReplies([...replies, tweet])
                         } else {

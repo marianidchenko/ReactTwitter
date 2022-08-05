@@ -35,7 +35,8 @@ export const ComposeTweet = () => {
             "photoURL": user.photoURL,
             tweetText,
             timestamp: new Date().getTime() / 1000,
-            ownerId: user.uid
+            ownerId: user.uid,
+            isReply: false,
         };
         if (upload) {
             tweetServices.uploadMedia(upload, user, setIncomplete)
