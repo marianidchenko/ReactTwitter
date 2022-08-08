@@ -34,6 +34,7 @@ export const Feed = () => {
                     <Tweet
                         key={tweet.id}
                         tweet={tweet}
+                        updateTweets={updateTweets}
                     />
                 ))}
 

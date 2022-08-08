@@ -9,7 +9,9 @@ import { ReplyTweet } from './ReplyTweet/ReplyTweet';
 import * as tweetServices from "../../../services/tweetServices";
 import * as profileServices from "../../../services/profileService";
 import styles from './Tweet.module.css'
+import { TweetContext } from "../../../contexts/TweetContext";
 export const Tweet = ({ tweet, replies, setReplies }) => {
+    const { updateTweets } = useContext(TweetContext)
     const [currentProfile, setCurrentProfile] = useState({});
     const [currentTweet, setCurrentTweet] = useState({});
     const [liked, setLiked] = useState();
@@ -38,10 +40,12 @@ export const Tweet = ({ tweet, replies, setReplies }) => {
             tweetServices.update(currentTweet.id, { likedBy: [...currentTweet.likedBy, user.uid] });
             setCurrentTweet({ ...currentTweet, likedBy: [...currentTweet.likedBy, user.uid] });
             setLiked(true);
+            updateTweets();
         } else {
             tweetServices.update(currentTweet.id, { likedBy: currentTweet.likedBy.filter(x => x !== user.uid) });
             setCurrentTweet({ ...currentTweet, likedBy: currentTweet.likedBy.filter(x => x !== user.uid) });
             setLiked(false);
+            updateTweets();
         }
     }
 
@@ -51,10 +55,12 @@ export const Tweet = ({ tweet, replies, setReplies }) => {
             tweetServices.update(currentTweet.id, { savedBy: [...currentTweet.savedBy, user.uid] });
             setCurrentTweet({ ...currentTweet, savedBy: [...currentTweet.savedBy, user.uid] });
             setSaved(true);
+            updateTweets()
         } else {
             tweetServices.update(currentTweet.id, { savedBy: currentTweet.savedBy.filter(x => x !== user.uid) });
             setCurrentTweet({ ...currentTweet, savedBy: currentTweet.savedBy.filter(x => x !== user.uid) });
             setSaved(false);
+            updateTweets()
         }
     }
 
@@ -101,6 +107,7 @@ export const Tweet = ({ tweet, replies, setReplies }) => {
         if (currentTweet) {
             setLiked(currentTweet.likedBy?.includes(user.uid));
             setSaved(currentTweet.savedBy?.includes(user.uid));
+            updateTweets();
         }
     }, [currentTweet]);
 
