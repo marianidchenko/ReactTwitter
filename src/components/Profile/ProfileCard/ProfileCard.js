@@ -1,11 +1,15 @@
 import { Fragment, useContext, useEffect, useState } from "react"
 import styles from "./ProfileCard.module.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../contexts/authContext";
 import * as profileServices from "../../../services/profileService"
+import { ProfileContext } from "../../../contexts/ProfileContext";
+import { ProfileEdit } from "../ProfileEdit/ProfileEdit";
 
 
-export const ProfileCard = ({ profile, tweetCount }) => {
+export const ProfileCard = ({ tweetCount }) => {
+    const { profile, setEditMode } = useContext(ProfileContext);
+    const navigate = useNavigate();
     const { user } = useContext(AuthContext)
     const re = /[A-Za-z]{3} \d{4}/
     const creationTime = (re.exec(profile.creationTime))[0];
@@ -34,6 +38,11 @@ export const ProfileCard = ({ profile, tweetCount }) => {
         setFollow(!follow);
     }
 
+    const onEditProfile = (e) => {
+        e.preventDefault();
+        setEditMode(true);
+    }
+
     return (
         <Fragment>
             <header className={styles["profile-header"]}>
@@ -47,7 +56,7 @@ export const ProfileCard = ({ profile, tweetCount }) => {
             </header>
             <div className={styles["profile-card"]}>
                 <img
-                    src="https://www.welovesolo.com/wp-content/uploads/2014/10/p18m34024butbj101mkq1pnjqr75-details.jpg"
+                    src={profile.bannerURL}
                     alt=""
                     className={styles["banner"]}
                 />
@@ -58,7 +67,7 @@ export const ProfileCard = ({ profile, tweetCount }) => {
                         className={styles["profile-photo"]}
                     />
                     {profile.username == user?.displayName.split("/")[1]
-                        ? <button className={styles["edit-profile-btn"]}>Edit profile</button>
+                        ? <button className={styles["edit-profile-btn"]} onClick={onEditProfile}>Edit profile</button>
                         : <button className={styles["edit-profile-btn"]} onClick={onToggleFollow} disabled={!user}>
                             {follow
                                 ? "Unfollow"
@@ -69,6 +78,7 @@ export const ProfileCard = ({ profile, tweetCount }) => {
 
                     <h1 className={styles["profile-name"]}>{profile.displayName}</h1>
                     <p className={styles["profile-username"]}>@{profile.username}</p>
+                    <p className={styles["profile-username"]}>{profile.bio}</p>
                     <p className={styles["profile-joined-date"]}>
                         <i className="fa-solid fa-calendar-days" />
                         Created {creationTime}

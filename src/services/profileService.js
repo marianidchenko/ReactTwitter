@@ -7,6 +7,12 @@ export const add = (newProfile) => {
     addDoc(profileCollectionRef, newProfile)
 }
 
+
+export const getByUid = (uid) => {
+    const q = query(profileCollectionRef, where("uid", "==", uid));
+    return getDocs(q)
+}
+
 export const getByUsername = (username) => {
     const q = query(profileCollectionRef, where("username", "==", username));
     return getDocs(q)

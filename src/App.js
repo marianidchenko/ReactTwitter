@@ -15,6 +15,7 @@ import { Profile } from "./components/Profile/Profile";
 import { TweetDetails } from "./components/TweetDetails/TweetDetails";
 import { ComposeTweetPopup } from "./components/Feed/Tweet/ComposeTweet/ComposeTweetPopup";
 import { Bookmarks } from "./components/Bookmarks/Bookmarks";
+import { ProfileEdit } from "./components/Profile/ProfileEdit/ProfileEdit";
 
 function App() {
 

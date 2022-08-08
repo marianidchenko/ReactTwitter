@@ -37,6 +37,8 @@ export const ProfileSetup = () => {
                 "username": username,
                 "photoURL": photo,
                 "creationTime": user.metadata.creationTime,
+                "bio": "",
+                "bannerURL": "https://www.welovesolo.com/wp-content/uploads/2014/10/p18m34024butbj101mkq1pnjqr75-details.jpg",
             })
             navigate('/');
         }).catch((error) => console.log(error));

@@ -8,18 +8,21 @@ import * as tweetServices from "../../services/tweetServices"
 import { useParams } from "react-router-dom";
 import { ProfileNav } from "./ProfileNav/ProfileNav";
 import styles from "./Profile.module.css"
+import { ProfileContext } from "../../contexts/ProfileContext";
+import { ProfileEdit } from "./ProfileEdit/ProfileEdit";
 
 export const Profile = () => {
     const { username } = useParams();
     const [profile, setProfile] = useState();
     const [tweets, setTweets] = useState(null);
     const [likes, setLikes] = useState(null);
+    const [editMode, setEditMode] = useState(false);
     const { user } = useContext(AuthContext);
 
     useEffect(() => {
         profileService.getByUsername(username)
             .then(snapshot => {
-                setProfile({...snapshot.docs[0].data(), "id": snapshot.docs[0].id})
+                setProfile({ ...snapshot.docs[0].data(), "id": snapshot.docs[0].id })
             })
 
     }, [username])
@@ -49,17 +52,23 @@ export const Profile = () => {
 
     return (
         <Fragment>
-            <LeftSidebar />
-            {profile && tweets &&
-                <div className={styles['profile-page']}>
-                    <ProfileCard profile={profile} tweetCount={tweets.length} />
-                    {
-                    user && <ProfileNav tweets={tweets} profileLikes={likes} />
-                    }
+            <ProfileContext.Provider value={{ profile, setProfile, editMode, setEditMode }}>
+                <LeftSidebar />
+                {profile && tweets && !editMode &&
+                    <div className={styles['profile-page']}>
+                        <ProfileCard tweetCount={tweets.length} />
+                        {
+                            user && <ProfileNav tweets={tweets} profileLikes={likes} />
+                        }
 
-                </div>
-            }
-            <RightSidebar />
+                    </div>
+                }
+                {profile && editMode &&
+                    <ProfileEdit />
+                }
+
+                <RightSidebar />
+            </ProfileContext.Provider>
         </Fragment>
     )
 }

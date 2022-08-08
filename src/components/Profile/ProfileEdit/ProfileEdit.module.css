@@ -1,0 +1,151 @@
+.edit-page {
+    max-width: 600px;
+    flex-grow: 1;
+    margin: 0 30px;
+
+}
+
+.edit-header {
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid var(--clr-light-gray);
+}
+
+.nav-back {
+    color: var(--clr-font-dark);
+}
+
+.nav-back i {
+    font-size: 16px;
+    padding: 11px;
+    margin-right: 10px;
+    border-radius: 52px;
+}
+
+.nav-back i:hover {
+    background-color: var(--clr-hover-gray);
+    cursor: pointer;
+}
+
+.edit-info {
+    margin-left: 40px;
+}
+
+.edit-title {
+    font-size: 20px;
+    color: var(--clr-font-dark);
+}
+
+
+.edit-card {
+    width: 100%;
+}
+
+.edit-card .banner {
+    z-index: -1;
+    width: 600px;
+    height: 200px;
+    object-fit: cover;
+    border: 1px solid var(--clr-light-gray);
+}
+
+.edit-details {
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    padding: 20px;
+    border-bottom: 1px solid var(--clr-light-gray);
+    border-right: 1px solid var(--clr-light-gray);
+    border-left: 1px solid var(--clr-light-gray);
+}
+
+.edit-details .edit-photo {
+    object-fit: cover;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 5px solid white;
+}
+
+.edit-photo-label {
+    position: absolute;
+    margin-left: 45px;
+    margin-top: 45px;
+}
+
+.edit-photo-label i {
+    font-size: 30px;
+    padding: 20px;
+    background-color: rgb(0, 0, 0);
+    opacity: 50%;
+    border-radius: 100%;
+    color: white;
+}
+
+.edit-banner-label {
+    position: absolute;
+    top: 130px;
+    margin-left: 250px;
+}
+
+.edit-banner-label i {
+    font-size: 20px;
+    padding: 15px;
+    background-color: rgb(0, 0, 0);
+    opacity: 50%;
+    border-radius: 100%;
+    color: white;
+}
+
+
+.edit-details .edit-name {
+    flex-basis: 100%;
+    margin-top: 20px;
+}
+
+.edit-banner-field {
+    width: 0px;
+    visibility: hidden;
+}
+
+.edit-photo-field {
+    width: 0px;
+    visibility: hidden;
+}
+
+.edit-field {
+    font-size: 15px;
+    padding: 10px 20px;
+    border-radius: 12px;
+    border: 1px solid var(--clr-font-gray);
+    resize: none;
+}
+
+.edit-label {
+    margin: 15px;
+    font-weight: 600;
+}
+
+.edit-btn {
+    font-size: 16px;
+    font-weight: 700;
+    color: #4c5155;
+    border: 1px solid #c8d2da;
+    border-radius: 52px;
+    padding: 10px 20px;
+    margin-top: 20px;
+}
+
+.edit-btn:hover {
+    cursor: pointer;
+    background-color: var(--clr-hover-gray);
+}
+
+.edit-btn:disabled {
+    pointer-events: none;
+}
