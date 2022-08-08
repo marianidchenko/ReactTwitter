@@ -1,20 +1,24 @@
+import "./tweet-nav.css";
+
 import { Fragment, useContext, useEffect, useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/authContext';
 import { DeleteTweet } from './DeleteTweet/DeleteTweet';
 import { EditTweet } from './EditTweet/EditTweet';
 import { ReplyTweet } from './ReplyTweet/ReplyTweet';
+import * as tweetServices from "../../../services/tweetServices";
+import * as profileServices from "../../../services/profileService";
 import styles from './Tweet.module.css'
 export const Tweet = ({ tweet, replies, setReplies }) => {
-    const [currentUsername, setCurrentUsername] = useState("")
+    const [currentProfile, setCurrentProfile] = useState({});
+    const [currentTweet, setCurrentTweet] = useState({});
+    const [liked, setLiked] = useState();
+    const [saved, setSaved] = useState();
 
     const [tweetControl, setTweetControl] = useState(false);
     const [alert, setAlert] = useState(false);
     const [edit, setEdit] = useState(false);
     const [reply, setReply] = useState(false);
-
-    const [tweetText, setTweetText] = useState("");
-    const [mediaURL, setMediaURL] = useState("");
 
     const { user } = useContext(AuthContext);
     const navigate = useNavigate();
@@ -26,6 +30,32 @@ export const Tweet = ({ tweet, replies, setReplies }) => {
 
     const onToggleReply = (e) => {
         setReply(!reply);
+    }
+
+    const onToggleLike = (e) => {
+        e.preventDefault();
+        if (!currentTweet.likedBy.includes(user.uid)) {
+            tweetServices.update(currentTweet.id, { likedBy: [...currentTweet.likedBy, user.uid] });
+            setCurrentTweet({ ...currentTweet, likedBy: [...currentTweet.likedBy, user.uid] });
+            setLiked(true);
+        } else {
+            tweetServices.update(currentTweet.id, { likedBy: currentTweet.likedBy.filter(x => x !== user.uid) });
+            setCurrentTweet({ ...currentTweet, likedBy: currentTweet.likedBy.filter(x => x !== user.uid) });
+            setLiked(false);
+        }
+    }
+
+    const onToggleSave = (e) => {
+        e.preventDefault();
+        if (!currentTweet.savedBy.includes(user.uid)) {
+            tweetServices.update(currentTweet.id, { savedBy: [...currentTweet.savedBy, user.uid] });
+            setCurrentTweet({ ...currentTweet, savedBy: [...currentTweet.savedBy, user.uid] });
+            setSaved(true);
+        } else {
+            tweetServices.update(currentTweet.id, { savedBy: currentTweet.savedBy.filter(x => x !== user.uid) });
+            setCurrentTweet({ ...currentTweet, savedBy: currentTweet.savedBy.filter(x => x !== user.uid) });
+            setSaved(false);
+        }
     }
 
 
@@ -43,52 +73,62 @@ export const Tweet = ({ tweet, replies, setReplies }) => {
 
     const openDetails = (e) => {
         e.preventDefault();
-        console.log(tweet)
-        if (tweet.isReply == false) {
-            navigate(`/tweet/${tweet.id}`);
+        if (currentTweet.isReply == false) {
+            navigate(`/tweet/${currentTweet.id}`);
         } else {
             console.log(tweet.replyTo)
-            navigate(`/tweet/${tweet.replyTo}`);
+            navigate(`/tweet/${currentTweet.replyTo}`);
         }
 
     }
 
     useEffect(() => {
         if (user) {
-            setCurrentUsername(user.displayName.split("/")[1]);
-        }
-        setTweetText(tweet.tweetText);
-        setMediaURL(tweet.mediaURL);
+            const username = user.displayName.split("/")[1];
+            profileServices.getByUsername(username).
+                then(data => {
+                    const profileData = data.docs[0].data();
+                    profileData["id"] = data.docs[0].id;
+                    setCurrentProfile(profileData);
 
-    }, [user, tweet])
+                    setCurrentTweet(tweet);
+
+                })
+        }
+    }, []);
+
+    useEffect(() => {
+        if (currentTweet) {
+            setLiked(currentTweet.likedBy?.includes(user.uid));
+            setSaved(currentTweet.savedBy?.includes(user.uid));
+        }
+    }, [currentTweet]);
+
 
     return (
         <Fragment>
             <div className={styles["tweet"]}>
-                <img src={tweet.photoURL} alt="" className={styles["tweet-profile-photo"]} onClick={() => { navigate("/" + tweet.username) }} />
+                <img src={currentTweet.photoURL} alt="" className={styles["tweet-profile-photo"]} onClick={() => { navigate("/" + currentTweet.username) }} />
                 <article className={styles['tweet-contents']}>
-                    <h3 className={styles["tweet-name"]}>{tweet.displayName}</h3>
-                    <p className={styles["tweet-username"]}>@{tweet.username}</p>
+                    <h3 className={styles["tweet-name"]}>{currentTweet.displayName}</h3>
+                    <p className={styles["tweet-username"]}>@{currentTweet.username}</p>
                     {!edit
                         ?
                         <p className={styles['tweet-text']} onClick={openDetails}>
-                            {tweet.isReply && <b className={styles["reply-tag"]}>Replied: </b>}
-                            {tweetText}
-                            {tweet.mediaURL
+                            {currentTweet.isReply && <b className={styles["reply-tag"]}>Replied: </b>}
+                            {currentTweet.tweetText}
+                            {currentTweet.mediaURL
                                 ? <img
-                                    src={mediaURL}
+                                    src={currentTweet.mediaURL}
                                     alt=""
                                     className={styles["tweet-media"]} />
                                 : ""
                             }
                         </p>
                         : <EditTweet
-                            id={tweet.id}
-                            tweetText={tweetText} setTweetText={setTweetText}
                             setEdit={setEdit}
-                            mediaURL={mediaURL} setMediaURL={setMediaURL}
-                            replies={replies}
-                            setReplies={setReplies}
+                            setCurrentTweet={setCurrentTweet}
+                            currentTweet={currentTweet}
                         />
                     }
 
@@ -104,13 +144,19 @@ export const Tweet = ({ tweet, replies, setReplies }) => {
                         <Link to="" className={styles["interaction-btn"]}>
                             <i className="fa-solid fa-retweet" />
                         </Link>
-                        <Link to="" className={styles["interaction-btn"]}>
-                            <i className="fa-solid fa-heart" />
+                        <Link to="" className={styles["interaction-btn"]} onClick={onToggleLike}>
+                            {liked
+                                ? <i className="fa-solid fa-heart liked" />
+                                : <i className="fa-solid fa-heart" />
+                            }
                         </Link>
-                        <Link to="" className={styles["interaction-btn"]}>
-                            <i className="fa-solid fa-bookmark"></i>
+                        <Link to="" className={styles["interaction-btn"]} onClick={onToggleSave}>
+                            {saved
+                                ? <i className="fa-solid fa-bookmark saved" />
+                                : <i className="fa-solid fa-bookmark" />
+                            }
                         </Link>
-                        {currentUsername == tweet.username &&
+                        {currentProfile.username == tweet.username &&
                             <Link to="" className={styles["interaction-btn"]} onClick={onToggleOptions}>
                                 <i className="fa-solid fa-ellipsis" />
                             </Link>

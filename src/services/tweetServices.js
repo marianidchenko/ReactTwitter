@@ -25,12 +25,24 @@ export const getAll = () => {
 
 export const getOne = (id) => {
     const tweetRef = doc(db, "tweets/" + id);
-    const docSnap =  getDoc(tweetRef);
+    const docSnap = getDoc(tweetRef);
     return docSnap;
 }
 
 export const getByOwner = (uid) => {
     const q = query(tweetCollectionRef, where("ownerId", "==", uid));
+    return getDocs(q)
+}
+
+
+export const getLikes = (uid) => {
+    const q = query(tweetCollectionRef, where("likedBy", "array-contains", uid));
+    return getDocs(q)
+}
+
+
+export const getSaves = (uid) => {
+    const q = query(tweetCollectionRef, where("savedBy", "array-contains", uid));
     return getDocs(q)
 }
 

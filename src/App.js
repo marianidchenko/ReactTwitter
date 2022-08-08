@@ -14,6 +14,7 @@ import { TweetContext } from "./contexts/TweetContext";
 import { Profile } from "./components/Profile/Profile";
 import { TweetDetails } from "./components/TweetDetails/TweetDetails";
 import { ComposeTweetPopup } from "./components/Feed/Tweet/ComposeTweet/ComposeTweetPopup";
+import { Bookmarks } from "./components/Bookmarks/Bookmarks";
 
 function App() {
 
@@ -40,6 +41,7 @@ function App() {
             <Route path="/:username" component={Profile} element={<Profile />} />
             <Route path="/tweet/:id" component={TweetDetails} element={<TweetDetails />} />
             <Route path="/compose" component={ComposeTweetPopup} element={<ComposeTweetPopup />} />
+            <Route path="/bookmarks" component={Bookmarks} element={<Bookmarks />} />
           </Routes>
           {composePopup && <ComposeTweetPopup />}
         </div>

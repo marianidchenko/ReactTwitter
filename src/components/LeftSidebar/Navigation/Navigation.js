@@ -41,7 +41,7 @@ export const Navigation = () => {
                         </Link>
                     </li>
                     <li className={styles["menu-items"]}>
-                        <Link to="" className={styles["menu-Link"]}>
+                        <Link to="/bookmarks" className={styles["menu-Link"]}>
                             <i className="fa-solid fa-bookmark" />
                             <p>Bookmarks</p>
                         </Link>

@@ -35,6 +35,8 @@ export const ReplyTweet = ({ id, setReply, replies, setReplies }) => {
             ownerId: user.uid,
             isReply: true,
             replyTo: id,
+            likedBy: [],
+            savedBy: [],
         };
         if (upload) {
             tweetServices.uploadMedia(upload, user, setIncomplete)

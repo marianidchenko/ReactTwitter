@@ -13,6 +13,7 @@ export const Profile = () => {
     const { username } = useParams();
     const [profile, setProfile] = useState();
     const [tweets, setTweets] = useState(null);
+    const [likes, setLikes] = useState(null);
     const { user } = useContext(AuthContext);
 
     useEffect(() => {
@@ -20,6 +21,7 @@ export const Profile = () => {
             .then(snapshot => {
                 setProfile(snapshot.docs[0].data())
             })
+
     }, [username])
 
     useEffect(() => {
@@ -27,13 +29,20 @@ export const Profile = () => {
             tweetServices.getByOwner(profile.uid)
                 .then(response => {
                     const tweetArray = []
-                    console.log(response.docs)
                     for (const doc of response.docs) {
                         const tweetInfo = doc.data();
                         tweetInfo['id'] = doc.id;
                         tweetArray.push(tweetInfo)
                     }
                     setTweets(tweetArray)
+                })
+        }
+        if (user) {
+            tweetServices.getLikes(user.uid)
+                .then(snapshot => {
+                    const likesArray = []
+                    snapshot.docs.map(x => likesArray.push({ ...x.data(), id: x.id }))
+                    setLikes(likesArray)
                 })
         }
     }, [profile])
@@ -44,7 +53,10 @@ export const Profile = () => {
             {profile && tweets &&
                 <div className={styles['profile-page']}>
                     <ProfileCard profile={profile} tweetCount={tweets.length} />
-                    <ProfileNav tweets={tweets} />
+                    {
+                    user && <ProfileNav tweets={tweets} profileLikes={likes} />
+                    }
+
                 </div>
             }
             <RightSidebar />

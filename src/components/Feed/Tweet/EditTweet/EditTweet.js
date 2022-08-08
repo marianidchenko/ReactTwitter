@@ -2,8 +2,8 @@ import styles from "./EditTweet.module.css"
 import * as tweetServices from "../../../../services/tweetServices"
 import { Fragment, useContext } from "react";
 import { AuthContext } from "../../../../contexts/authContext";
-export const EditTweet = ({ id, tweetText, mediaURL, setTweetText, setMediaURL, setEdit }) => {
-    const { user, replies, setReplies } = useContext(AuthContext);
+export const EditTweet = ({ setEdit, currentTweet, setCurrentTweet }) => {
+    const { user } = useContext(AuthContext);
     const onSubmit = (e) => {
         e.preventDefault();
         const formData = new FormData(e.target);
@@ -12,29 +12,30 @@ export const EditTweet = ({ id, tweetText, mediaURL, setTweetText, setMediaURL, 
         if (newMedia?.size > 0) {
             tweetServices.uploadMedia(newMedia, user, () => { })
                 .then(resultURL => {
-                    setMediaURL(resultURL);
-                    tweetServices.update(id, {
+                    tweetServices.update(currentTweet.id, {
                         "tweetText": newText,
                         "mediaURL": resultURL,
                     });
+                    setCurrentTweet({...currentTweet, mediaURL: resultURL, tweetText: newText})
                 })
         } else {
-            tweetServices.update(id, {
+            tweetServices.update(currentTweet.id, {
                 "tweetText": newText,
             });
         }
-        setTweetText(newText);
+        setCurrentTweet({...currentTweet, tweetText: newText});
         setEdit(false);
+        console.log(currentTweet);
     }
 
     return (
         <form className={styles['edit-form']} onSubmit={onSubmit} >
-            <input type="text" className={styles['edit-text']} defaultValue={tweetText} name="tweet-text" />
+            <input type="text" className={styles['edit-text']} defaultValue={currentTweet.tweetText} name="tweet-text" />
 
-            {mediaURL &&
+            {currentTweet.mediaURL &&
                 <Fragment>
                     <img
-                        src={mediaURL}
+                        src={currentTweet.mediaURL}
                         alt=""
                         className={styles["tweet-media"]}
                     />

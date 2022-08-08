@@ -3,9 +3,8 @@ import { Link } from "react-router-dom";
 import { Fragment, useEffect, useState } from "react";
 import { Tweet } from "../../Feed/Tweet/Tweet";
 
-export const ProfileNav = ({tweets}) => {
+export const ProfileNav = ({tweets, profileLikes}) => {
     const [currentTweets, setCurrentTweets] = useState(tweets);
-
     useEffect(() => {
         onTweets()
     }, [tweets]);
@@ -26,7 +25,9 @@ export const ProfileNav = ({tweets}) => {
         }))
     };
 
-    const onLikes = () => {}
+    const onLikes = () => {
+        setCurrentTweets(profileLikes)
+    }
 
     return (
         <Fragment>
