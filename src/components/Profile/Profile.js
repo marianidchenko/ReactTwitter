@@ -19,7 +19,7 @@ export const Profile = () => {
     useEffect(() => {
         profileService.getByUsername(username)
             .then(snapshot => {
-                setProfile(snapshot.docs[0].data())
+                setProfile({...snapshot.docs[0].data(), "id": snapshot.docs[0].id})
             })
 
     }, [username])

@@ -89,6 +89,10 @@
     background-color: var(--clr-hover-gray);
 }
 
+.profile-details .edit-profile-btn:disabled {
+    pointer-events: none;
+}
+
 .profile-details .profile-name {
     flex-basis: 100%;
     margin-top: 20px;

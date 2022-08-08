@@ -16,3 +16,9 @@ export const update = (id, updatedProfile) => {
     const profileRef = doc(db, "profile-info/" + id);
     return updateDoc(profileRef, updatedProfile);
 }
+
+export const getFollowing = (uid) => {
+    const profileRef = doc(db, "profile-info/" + uid);
+    const q = query(profileCollectionRef, where("followedBy", "array-contains", uid));
+    return getDocs(q);
+}

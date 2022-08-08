@@ -1,14 +1,38 @@
-import { Fragment, useContext } from "react"
+import { Fragment, useContext, useEffect, useState } from "react"
 import styles from "./ProfileCard.module.css";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../contexts/authContext";
-
+import * as profileServices from "../../../services/profileService"
 
 
 export const ProfileCard = ({ profile, tweetCount }) => {
     const { user } = useContext(AuthContext)
     const re = /[A-Za-z]{3} \d{4}/
     const creationTime = (re.exec(profile.creationTime))[0];
+    const [follow, setFollow] = useState();
+    const [followingNumber, setFollowingNumber] = useState();
+    const [followerNumber, setFollowerNumber] = useState();
+
+
+    useEffect(() => {
+        setFollow(profile.followedBy.includes(user?.uid))
+        setFollowerNumber(profile.followedBy.length)
+        profileServices.getFollowing(profile.uid)
+            .then(res => setFollowingNumber(res.size))
+    }, [user])
+
+    const onToggleFollow = () => {
+        console.log([...profile.followedBy, user.uid])
+        if (!follow) {
+            profileServices.update(profile.id, { followedBy: [...profile.followedBy, user.uid] })
+            setFollowerNumber(followerNumber + 1)
+        }
+        else {
+            profileServices.update(profile.id, { followedBy: profile.followedBy.filter(x => x !== user.uid) })
+            setFollowerNumber(followerNumber - 1)
+        }
+        setFollow(!follow);
+    }
 
     return (
         <Fragment>
@@ -35,7 +59,12 @@ export const ProfileCard = ({ profile, tweetCount }) => {
                     />
                     {profile.username == user?.displayName.split("/")[1]
                         ? <button className={styles["edit-profile-btn"]}>Edit profile</button>
-                        : <button className={styles["edit-profile-btn"]}>Follow</button>
+                        : <button className={styles["edit-profile-btn"]} onClick={onToggleFollow} disabled={!user}>
+                            {follow
+                                ? "Unfollow"
+                                : "Follow"
+                            }
+                        </button>
                     }
 
                     <h1 className={styles["profile-name"]}>{profile.displayName}</h1>
@@ -46,10 +75,10 @@ export const ProfileCard = ({ profile, tweetCount }) => {
                     </p>
                     <div className={styles["followers"]}>
                         <p className={styles["followers-info"]}>
-                            <b className={styles["follower-count"]}>2</b> Following
+                            <b className={styles["follower-count"]}>{followingNumber}</b> Following
                         </p>
                         <p className={styles["followers-info"]}>
-                            <b className={styles["follower-count"]}>0</b> Followers
+                            <b className={styles["follower-count"]}>{followerNumber}</b> Followers
                         </p>
                     </div>
                 </article>
