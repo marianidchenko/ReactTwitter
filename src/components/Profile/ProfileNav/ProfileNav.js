@@ -8,7 +8,7 @@ export const ProfileNav = ({tweets}) => {
 
     useEffect(() => {
         onTweets()
-    }, []);
+    }, [tweets]);
 
     const onTweets = () => {
         setCurrentTweets(tweets.filter(tweet => {
@@ -28,7 +28,6 @@ export const ProfileNav = ({tweets}) => {
 
     const onLikes = () => {}
 
-    console.log(tweets)
     return (
         <Fragment>
             <nav className={styles["profile-nav"]}>

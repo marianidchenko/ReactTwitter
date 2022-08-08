@@ -43,7 +43,14 @@ export const Tweet = ({ tweet, replies, setReplies }) => {
 
     const openDetails = (e) => {
         e.preventDefault();
-        navigate(`/tweet/${tweet.id}`);
+        console.log(tweet)
+        if (tweet.isReply == false) {
+            navigate(`/tweet/${tweet.id}`);
+        } else {
+            console.log(tweet.replyTo)
+            navigate(`/tweet/${tweet.replyTo}`);
+        }
+
     }
 
     useEffect(() => {

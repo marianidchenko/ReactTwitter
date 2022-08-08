@@ -20,7 +20,7 @@ export const Profile = () => {
             .then(snapshot => {
                 setProfile(snapshot.docs[0].data())
             })
-    }, [profile])
+    }, [username])
 
     useEffect(() => {
         if (profile) {
