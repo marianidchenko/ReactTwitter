@@ -37,8 +37,8 @@ export const Profile = () => {
                     setTweets(tweetArray)
                 })
         }
-        if (user) {
-            tweetServices.getLikes(user.uid)
+        if (profile) {
+            tweetServices.getLikes(profile.uid)
                 .then(snapshot => {
                     const likesArray = []
                     snapshot.docs.map(x => likesArray.push({ ...x.data(), id: x.id }))
