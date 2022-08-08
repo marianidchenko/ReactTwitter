@@ -9,7 +9,6 @@ export const ComposeTweetPopup = () => {
     const { updateTweets, setComposePopup } = useContext(TweetContext);
     const { user } = useContext(AuthContext);
     const [incomplete, setIncomplete] = useState("");
-
     const [tweetText, setTweetText] = useState("");
     const [media, setMedia] = useState("");
     const [upload, setUpload] = useState(null);
@@ -64,7 +63,10 @@ export const ComposeTweetPopup = () => {
         <div className={styles["during-popup"]} onClick={() => {setComposePopup(false)}}>
             {user &&
                 <div className={styles['compose-tweet']} onClick={(e) => {e.stopPropagation()}}>
-                    <Link to="" className={styles['exit-btn']} onClick={() => {setComposePopup(false)}}><i class="fa-solid fa-x"></i></Link>
+                    <Link to="" className={styles['exit-btn']} onClick={(e) => {
+                        e.preventDefault();
+                        setComposePopup(false)
+                        }}><i class="fa-solid fa-x"></i></Link>
                     <img
                         src={user.photoURL}
                         alt={""}
