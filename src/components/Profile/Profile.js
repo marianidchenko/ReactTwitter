@@ -20,15 +20,18 @@ export const Profile = () => {
             .then(snapshot => {
                 setProfile(snapshot.docs[0].data())
             })
-    }, [])
+    }, [profile])
 
     useEffect(() => {
         if (profile) {
             tweetServices.getByOwner(profile.uid)
                 .then(response => {
                     const tweetArray = []
+                    console.log(response.docs)
                     for (const doc of response.docs) {
-                        tweetArray.push(doc.data())
+                        const tweetInfo = doc.data();
+                        tweetInfo['id'] = doc.id;
+                        tweetArray.push(tweetInfo)
                     }
                     setTweets(tweetArray)
                 })
