@@ -96,15 +96,13 @@ export const Tweet = ({ tweet, replies, setReplies }) => {
                     const profileData = data.docs[0].data();
                     profileData["id"] = data.docs[0].id;
                     setCurrentProfile(profileData);
-
-                    setCurrentTweet(tweet);
-
                 })
         }
+        setCurrentTweet(tweet);
     }, []);
 
     useEffect(() => {
-        if (currentTweet) {
+        if (user) {
             setLiked(currentTweet.likedBy?.includes(user.uid));
             setSaved(currentTweet.savedBy?.includes(user.uid));
             updateTweets();
