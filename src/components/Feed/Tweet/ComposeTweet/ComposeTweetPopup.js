@@ -28,13 +28,12 @@ export const ComposeTweetPopup = () => {
     const onSubmit = async (e) => {
         e.preventDefault();
         let tweet = {
-            displayName: user.displayName.split("/")[0],
-            username: user.displayName.split("/")[1],
-            "photoURL": user.photoURL,
             tweetText,
             timestamp: new Date().getTime() / 1000,
             ownerId: user.uid,
             isReply: false,
+            likedBy: [],
+            savedBy: [],
         };
         if (upload) {
             tweetServices.uploadMedia(upload, user, setIncomplete)

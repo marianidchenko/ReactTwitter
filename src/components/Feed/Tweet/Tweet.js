@@ -16,6 +16,7 @@ export const Tweet = ({ tweet, replies, setReplies }) => {
     const [currentTweet, setCurrentTweet] = useState({});
     const [liked, setLiked] = useState();
     const [saved, setSaved] = useState();
+    const [author, setAuthor] = useState();
 
     const [tweetControl, setTweetControl] = useState(false);
     const [alert, setAlert] = useState(false);
@@ -98,6 +99,8 @@ export const Tweet = ({ tweet, replies, setReplies }) => {
                     setCurrentProfile(profileData);
                 })
         }
+        profileServices.getByUid(tweet.ownerId)
+        .then(res => setAuthor(res.docs[0].data()))
         setCurrentTweet(tweet);
     }, []);
 
@@ -113,10 +116,10 @@ export const Tweet = ({ tweet, replies, setReplies }) => {
     return (
         <Fragment>
             <div className={styles["tweet"]}>
-                <img src={currentTweet.photoURL} alt="" className={styles["tweet-profile-photo"]} onClick={() => { navigate("/" + currentTweet.username) }} />
+                <img src={author?.photoURL} alt="" className={styles["tweet-profile-photo"]} onClick={() => { navigate("/" + author?.username) }} />
                 <article className={styles['tweet-contents']}>
-                    <h3 className={styles["tweet-name"]}>{currentTweet.displayName}</h3>
-                    <p className={styles["tweet-username"]}>@{currentTweet.username}</p>
+                    <h3 className={styles["tweet-name"]}>{author?.displayName}</h3>
+                    <p className={styles["tweet-username"]}>@{author?.username}</p>
                     {!edit
                         ?
                         <p className={styles['tweet-text']} onClick={openDetails}>

@@ -27,9 +27,6 @@ export const ReplyTweet = ({ id, setReply, replies, setReplies }) => {
     const onSubmit = async (e) => {
         e.preventDefault();
         let tweet = {
-            displayName,
-            username,
-            "photoURL": user.photoURL,
             tweetText,
             timestamp: new Date().getTime() / 1000,
             ownerId: user.uid,
