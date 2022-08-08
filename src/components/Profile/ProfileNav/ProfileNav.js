@@ -1,30 +1,55 @@
 import styles from "./ProfileNav.module.css";
 import { Link } from "react-router-dom";
-import { Fragment } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Tweet } from "../../Feed/Tweet/Tweet";
 
 export const ProfileNav = ({tweets}) => {
+    const [currentTweets, setCurrentTweets] = useState(tweets);
+
+    useEffect(() => {
+        onTweets()
+    }, []);
+
+    const onTweets = () => {
+        setCurrentTweets(tweets.filter(tweet => {
+            return tweet.isReply == false;
+        }))
+    }
+
+    const onTweetsAndReplies = () => {
+        setCurrentTweets(tweets)
+    };
+    
+    const onMedia = () => {
+        setCurrentTweets(tweets.filter(tweet => {
+            return tweet.mediaURL;
+        }))
+    };
+
+    const onLikes = () => {}
+
+    console.log(tweets)
     return (
         <Fragment>
             <nav className={styles["profile-nav"]}>
                 <ul className={styles["nav-ul"]}>
                     <li className={styles["nav-li"]}>
-                        <Link to="" className={styles["profile-link"]}>
+                        <Link to="" className={styles["profile-link"]} onClick={onTweets}>
                             Tweets
                         </Link>
                     </li>
                     <li className={styles["nav-li"]}>
-                        <Link to="" className={styles["profile-link"]}>
+                        <Link to="" className={styles["profile-link"]} onClick={onTweetsAndReplies}>
                             Tweets & replies
                         </Link>
                     </li>
                     <li className={styles["nav-li"]}>
-                        <Link to="" className={styles["profile-link"]}>
+                        <Link to="" className={styles["profile-link"]} onClick={onMedia}>
                             Media
                         </Link>
                     </li>
                     <li className={styles["nav-li"]}>
-                        <Link to="" className={styles["profile-link"]}>
+                        <Link to="" className={styles["profile-link"]} onClick={onLikes}>
                             Likes
                         </Link>
                     </li>
@@ -32,7 +57,7 @@ export const ProfileNav = ({tweets}) => {
             </nav>
             <div className={styles["display-tweet-container"]}>
                 {
-                    tweets.map((tweet) => (
+                    currentTweets.map((tweet) => (
                         <Tweet
                             key={tweet.id}
                             tweet={tweet}
