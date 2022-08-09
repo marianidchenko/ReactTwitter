@@ -89,3 +89,7 @@ input[type=file]::-webkit-file-upload-button {
     color: var(--clr-blue);
     text-decoration: none;
 }
+
+.label-error {
+    margin-left: 20px;
+}
