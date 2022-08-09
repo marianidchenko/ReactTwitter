@@ -25,7 +25,6 @@ export const EditTweet = ({ setEdit, currentTweet, setCurrentTweet }) => {
         }
         setCurrentTweet({...currentTweet, tweetText: newText});
         setEdit(false);
-        console.log(currentTweet);
     }
 
     return (

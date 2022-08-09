@@ -11,7 +11,7 @@ import * as profileServices from "../../../services/profileService";
 import styles from './Tweet.module.css'
 import { TweetContext } from "../../../contexts/TweetContext";
 export const Tweet = ({ tweet, replies, setReplies }) => {
-    const { updateTweets } = useContext(TweetContext)
+    const { updateTweets } = useContext(TweetContext);
     const [currentProfile, setCurrentProfile] = useState({});
     const [currentTweet, setCurrentTweet] = useState({});
     const [liked, setLiked] = useState();
@@ -65,7 +65,6 @@ export const Tweet = ({ tweet, replies, setReplies }) => {
         }
     }
 
-
     const deleteHandler = (e) => {
         setAlert(true);
         setEdit(false);
@@ -100,7 +99,7 @@ export const Tweet = ({ tweet, replies, setReplies }) => {
                 })
         }
         profileServices.getByUid(tweet.ownerId)
-        .then(res => setAuthor(res.docs[0].data()))
+            .then(res => setAuthor(res.docs[0].data()))
         setCurrentTweet(tweet);
     }, []);
 
@@ -125,12 +124,8 @@ export const Tweet = ({ tweet, replies, setReplies }) => {
                         <p className={styles['tweet-text']} onClick={openDetails}>
                             {currentTweet.isReply && <b className={styles["reply-tag"]}>Replied: </b>}
                             {currentTweet.tweetText}
-                            {currentTweet.mediaURL
-                                ? <img
-                                    src={currentTweet.mediaURL}
-                                    alt=""
-                                    className={styles["tweet-media"]} />
-                                : ""
+                            {currentTweet.mediaURL &&
+                                <img src={currentTweet.mediaURL} className={styles["tweet-media"]} />
                             }
                         </p>
                         : <EditTweet
@@ -164,7 +159,7 @@ export const Tweet = ({ tweet, replies, setReplies }) => {
                                 : <i className="fa-solid fa-bookmark" />
                             }
                         </Link>
-                        {currentProfile.username == tweet.username &&
+                        {currentProfile.username == author?.username &&
                             <Link to="" className={styles["interaction-btn"]} onClick={onToggleOptions}>
                                 <i className="fa-solid fa-ellipsis" />
                             </Link>

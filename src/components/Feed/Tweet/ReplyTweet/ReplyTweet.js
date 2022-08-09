@@ -5,12 +5,9 @@ import styles from './ReplyTweet.module.css'
 
 export const ReplyTweet = ({ id, setReply, replies, setReplies }) => {
     const { user } = useContext(AuthContext);
-
-    const [displayName, username] = user.displayName.split('/');
     const [incomplete, setIncomplete] = useState("");
 
     const [tweetText, setTweetText] = useState("");
-    const [media, setMedia] = useState("");
     const [upload, setUpload] = useState(null);
 
     const onTextChange = (e) => {
@@ -18,7 +15,6 @@ export const ReplyTweet = ({ id, setReply, replies, setReplies }) => {
     }
 
     const onMediaSelect = (e) => {
-        setMedia(e.target.value)
         if (e.target.files[0] && user) {
             setUpload(e.target.files[0])
         }
@@ -63,12 +59,11 @@ export const ReplyTweet = ({ id, setReply, replies, setReplies }) => {
             } catch (error) {
                 console.log(error);
             }
-            setReply(false);
         }
 
         setTweetText("");
-        setMedia("");
         setUpload(null);
+        setReply(false);
 
     }
 
@@ -88,7 +83,7 @@ export const ReplyTweet = ({ id, setReply, replies, setReplies }) => {
                     onChange={onTextChange}
                 />
                 <label className={styles['tweet-media-label']} htmlFor='tweet-media'><i className="fa-solid fa-image"></i></label>
-                <input id="tweet-media" type="file" className={styles['tweet-media-input']} onChange={onMediaSelect} value={media} />
+                <input id="tweet-media" type="file" className={styles['tweet-media-input']} onChange={onMediaSelect} />
                 <input type="submit" value="Reply" disabled={incomplete} className={styles['tweet-btn']} />
             </form>
         </div>
