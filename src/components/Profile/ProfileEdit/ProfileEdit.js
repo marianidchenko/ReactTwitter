@@ -21,16 +21,25 @@ export const ProfileEdit = () => {
         console.log(bannerFile, photoFile)
         if (bannerFile.size > 0) {
             profilePhotoServices.uploadBanner(bannerFile, user)
-                .then((bannerURL) => { profileServices.update(profile.id, {bannerURL}) })
+                .then((bannerURL) => { 
+                    profileServices.update(profile.id, {bannerURL})
+                    setProfile({...profile, bannerURL})
+                 })
         }
         if (photoFile.size > 0) {
             profilePhotoServices.upload(photoFile, user, () => { })
-                .then((photoURL) => { profileServices.update(profile.id, {photoURL}) })
+                .then((photoURL) => { 
+                    profileServices.update(profile.id, {photoURL}) 
+                    setProfile({...profile, photoURL})
+                    updateProfile(user, {photoURL})
+                })
         }
         updateProfile(user, {
             displayName: `${displayName}/${profile.username}`
         })
-        profileServices.update(profile.id, {displayName, bio})
+        profileServices.update(profile.id, {displayName, bio});
+        setProfile({...profile, displayName, bio})
+        setEditMode(false);
     }
 
     useEffect(() => {

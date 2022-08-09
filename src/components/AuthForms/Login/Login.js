@@ -56,7 +56,7 @@ export const Login = () => {
                 {emailError && <label className="label-error">{emailError}</label>}
                 <input type="password" className="form-field" placeholder="Password" value={password} onChange={(e) => { setPassword(e.target.value) }} onBlur={validatePassword} />
                 {passwordError && <label className="label-error">{passwordError}</label>}
-                <button type="submit" className="form-btn">Sign in</button>
+                <button type="submit" className="form-btn" disabled={emailError || passwordError}>Sign in</button>
                 <Link to="/register" className="suggestion">Don't have an account? Get started here.</Link>
             </form>
         </div>

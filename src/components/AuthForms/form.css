@@ -80,7 +80,8 @@ input[type=file]::-webkit-file-upload-button {
 }
 
 .form-btn:disabled {
-    color: var(--clr-font-gray);
+    background-color: var(--clr-font-gray);
+    color: var(--clr-light-gray);
     pointer-events: none;
 }
 
