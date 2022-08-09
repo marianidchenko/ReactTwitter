@@ -50,7 +50,8 @@ export const ReplyTweet = ({ id, setReply, replies, setReplies }) => {
                     .then(snap => {
                         if (replies) {
                             setReplies([...replies, tweet])
-                        } else {
+                        } 
+                        else {
                             setReplies([tweet])
                         }
                     })

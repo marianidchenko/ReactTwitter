@@ -10,7 +10,7 @@ import * as tweetServices from "../../../services/tweetServices";
 import * as profileServices from "../../../services/profileService";
 import styles from './Tweet.module.css'
 import { TweetContext } from "../../../contexts/TweetContext";
-export const Tweet = ({ tweet, replies, setReplies }) => {
+export const Tweet = ({ tweet, replies, setReplies, profileView }) => {
     const { updateTweets } = useContext(TweetContext);
     const [currentProfile, setCurrentProfile] = useState({});
     const [currentTweet, setCurrentTweet] = useState({});
@@ -137,7 +137,7 @@ export const Tweet = ({ tweet, replies, setReplies }) => {
 
 
                 </article>
-                {user
+                {user && !profileView
                     ? <div className={styles["interaction-menu"]}>
                         {!tweet.isReply &&
                             <Link to="" className={styles["interaction-btn"]} onClick={onToggleReply}>
@@ -167,7 +167,9 @@ export const Tweet = ({ tweet, replies, setReplies }) => {
                     </div>
                     : ""
                 }
-                {reply && <ReplyTweet id={tweet.id} setReply={setReply} replies={replies} setReplies={setReplies} />}
+                {reply &&
+                    <ReplyTweet id={tweet.id} setReply={setReply} replies={replies} setReplies={setReplies}/>
+                }
                 <div className={styles["interaction-container"]}>
                     {tweetControl &&
                         <div className={styles["tweet-card-menu"]}>

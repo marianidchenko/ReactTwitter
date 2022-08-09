@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Fragment, useEffect, useState } from "react";
 import { Tweet } from "../../Feed/Tweet/Tweet";
 
-export const ProfileNav = ({tweets, profileLikes}) => {
+export const ProfileNav = ({ tweets, profileLikes }) => {
     const [currentTweets, setCurrentTweets] = useState(tweets);
     useEffect(() => {
         onTweets()
@@ -16,9 +16,9 @@ export const ProfileNav = ({tweets, profileLikes}) => {
     }
 
     const onTweetsAndReplies = () => {
-        setCurrentTweets(tweets)
+        setCurrentTweets(tweets);
     };
-    
+
     const onMedia = () => {
         setCurrentTweets(tweets.filter(tweet => {
             return tweet.mediaURL;
@@ -61,6 +61,7 @@ export const ProfileNav = ({tweets, profileLikes}) => {
                         <Tweet
                             key={tweet.id}
                             tweet={tweet}
+                            profileView={true}
                         />
                     ))}
             </div>

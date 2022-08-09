@@ -1,5 +1,5 @@
 import { Fragment, useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import * as tweetServices from '../../services/tweetServices';
 import styles from './TweetDetails.module.css'
 import { LeftSidebar } from '../LeftSidebar/LeftSidebar';
@@ -7,7 +7,7 @@ import { RightSidebar } from '../RightSidebar/RightSidebar';
 import { Tweet } from '../Feed/Tweet/Tweet';
 export const TweetDetails = () => {
     const tweetId = useParams().id;
-
+    const navigate = useNavigate();
     const [currentTweet, setCurrentTweet] = useState(null);
     const [replies, setReplies] = useState([]);
 
@@ -33,7 +33,7 @@ export const TweetDetails = () => {
             <LeftSidebar />
             <div className={styles["tweet-detail-page"]}>
                 <header className={styles["tweet-header"]}>
-                    <Link to="/" className={styles["nav-back"]}>
+                    <Link to="" className={styles["nav-back"]} onClick={() => {navigate(-1)}}>
                         <i className="fa-solid fa-arrow-left" />
                     </Link>
                     <h2 className={styles["tweet-title"]}>Tweet</h2>
