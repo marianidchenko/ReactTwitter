@@ -6,7 +6,7 @@ import * as tweetServices from "../../../../services/tweetServices"
 import styles from './ComposeTweetPopup.module.css'
 
 export const ComposeTweetPopup = () => {
-    const { updateTweets, setComposePopup } = useContext(TweetContext);
+    const { updateTweets, composePopup, setComposePopup } = useContext(TweetContext);
     const { user } = useContext(AuthContext);
     const [incomplete, setIncomplete] = useState("");
     const [tweetText, setTweetText] = useState("");
@@ -57,34 +57,36 @@ export const ComposeTweetPopup = () => {
         setUpload(null);
         setComposePopup(false);
     }
-
-    return (
-        <div className={styles["during-popup"]} onClick={() => {setComposePopup(false)}}>
-            {user &&
-                <div className={styles['compose-tweet']} onClick={(e) => {e.stopPropagation()}}>
-                    <Link to="" className={styles['exit-btn']} onClick={(e) => {
-                        e.preventDefault();
-                        setComposePopup(false)
+    if (composePopup) {
+        return (
+            <div className={styles["during-popup"]} onClick={() => { setComposePopup(false) }}>
+                {user &&
+                    <div className={styles['compose-tweet']} onClick={(e) => { e.stopPropagation() }}>
+                        <Link to="" className={styles['exit-btn']} onClick={(e) => {
+                            e.preventDefault();
+                            setComposePopup(false)
                         }}><i class="fa-solid fa-x"></i></Link>
-                    <img
-                        src={user.photoURL}
-                        alt={""}
-                        className={styles['profile-photo']}
-                    />
-                    <form className={styles['tweet-contents']} onSubmit={onSubmit} >
-                        <input
-                            type="text"
-                            placeholder="What's happening?"
-                            className={styles['tweet-text']}
-                            value={tweetText}
-                            onChange={onTextChange}
+                        <img
+                            src={user.photoURL}
+                            alt={""}
+                            className={styles['profile-photo']}
                         />
-                        <label className={styles['tweet-media-label']} htmlFor='tweet-media'><i className="fa-solid fa-image"></i></label>
-                        <input id="tweet-media" type="file" className={styles['tweet-media-input']} onChange={onMediaSelect} value={media} />
-                        <input type="submit" value="Tweet" disabled={incomplete} className={styles['tweet-btn']} />
-                    </form>
-                </div>
-            }
-        </div>
-    )
+                        <form className={styles['tweet-contents']} onSubmit={onSubmit} >
+                            <input
+                                type="text"
+                                placeholder="What's happening?"
+                                className={styles['tweet-text']}
+                                value={tweetText}
+                                onChange={onTextChange}
+                            />
+                            <label className={styles['tweet-media-label']} htmlFor='tweet-media'><i className="fa-solid fa-image"></i></label>
+                            <input id="tweet-media" type="file" className={styles['tweet-media-input']} onChange={onMediaSelect} value={media} />
+                            <input type="submit" value="Tweet" disabled={incomplete} className={styles['tweet-btn']} />
+                        </form>
+                    </div>
+                }
+            </div>
+        )
+    }
+
 }
