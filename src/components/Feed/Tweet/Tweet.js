@@ -115,7 +115,7 @@ export const Tweet = ({ tweet, replies, setReplies, profileView }) => {
     return (
         <Fragment>
             <div className={styles["tweet"]}>
-                <img src={author?.photoURL} alt="" className={styles["tweet-profile-photo"]} onClick={() => { navigate("/" + author?.username) }} />
+                <img src={author?.photoURL} alt="" className={styles["tweet-profile-photo"]} onClick={() => { navigate("/profile/" + author?.username) }} />
                 <article className={styles['tweet-contents']}>
                     <h3 className={styles["tweet-name"]}>{author?.displayName}</h3>
                     <p className={styles["tweet-username"]}>@{author?.username}</p>

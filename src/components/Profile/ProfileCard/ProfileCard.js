@@ -1,15 +1,13 @@
 import { Fragment, useContext, useEffect, useState } from "react"
 import styles from "./ProfileCard.module.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { AuthContext } from "../../../contexts/authContext";
 import * as profileServices from "../../../services/profileService"
 import { ProfileContext } from "../../../contexts/ProfileContext";
-import { ProfileEdit } from "../ProfileEdit/ProfileEdit";
 
 
 export const ProfileCard = ({ tweetCount }) => {
     const { profile, setEditMode } = useContext(ProfileContext);
-    const navigate = useNavigate();
     const { user } = useContext(AuthContext)
     const re = /[A-Za-z]{3} \d{4}/
     const creationTime = (re.exec(profile.creationTime))[0];

@@ -29,7 +29,7 @@ export const UserSection = ({ user }) => {
                         alt=""
                         className={styles["profile-photo"]}
                     />
-                    <div className={styles["menu-profile-info"]} onClick={()=>{navigate(`/${username}`)}}>
+                    <div className={styles["menu-profile-info"]} onClick={()=>{navigate(`/profile/${username}`)}}>
                         <h3 className={styles["menu-profile-name"]}>{displayName}</h3>
                         <p className={styles["menu-profile-handle"]}>@{username}</p>
                     </div>
