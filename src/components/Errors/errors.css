@@ -1,5 +1,32 @@
 .warningWrapper {
     position: absolute;
-    top: 45%;
+    display: flex;
+    flex-direction: column;
+    top: 40%;
     text-align: center;
+}
+
+.warningWrapper .code {
+    font-size: 45px;
+}
+
+.warningWrapper .warning {
+    margin-top: 10px;
+    font-size: 32px;
+}
+
+.homeBtn {
+    text-decoration: none;
+    margin-top: 20px;
+    font-size: 20px;
+    font-weight: 700;
+    color: white;
+    background: var(--clr-blue);
+    border-radius: 52px;
+    padding: 15px 25px;
+}
+
+.homeBtn:hover {
+    cursor: pointer;
+    background-color: rgb(26, 138, 212);
 }
