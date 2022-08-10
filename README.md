@@ -1,70 +1,33 @@
-# Getting Started with Create React App
+## Tweeter - Twitter-like
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This application demo is a twitter-like social media application
 
-## Available Scripts
+# Important: the code would require a firebase-config file to run locally, since it's not uploaded you can find it hosted here https://tweeter-4742e.web.app/
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+- Full authentication (registration and login)
+- Public parts, for everyone, and private ones for the ones with a profile
+- Profile customization with bio, profile photo, banner and more
+- Ability to create posts with or without media as an authenticated user
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Liking, saving and commenting on posts made by other users
+- The ability to tweet and delete (or edit if you prefer that)
+- Following others and keeping track of how many people have followed you
+- Checking out other profiles and all of their posting and commenting history, as well as their likes (They get some privacy with their bookmarks)
+- Keeping track of your favourite posts with bookmarks
+- Editing your profile.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- Error handling, data validation and default values where needed, no console errors here.
+- Responsive design on PC, laptop and standard tablets (mobile is in the works)
 
-### `npm test`
+## Currently static aspects 
+- The trends and recommendations sidebar, the algorithm is in the works
+- Explore (Currently just Home), notifications, messages, lists
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Project architecture
+- Components separated in their own folders, and nested where needed, each with a module.css file 
+(with exceptions of common css like auth-forms and error-pages)
+- Context, custom routes, custom hooks and services all separated in their own folders for easy management in src
+- Contexts take care of mostly globally available values, but some are simply passed between components where needed
+- Custom routes in the app to ensure that irrelevant to the authentication status components are not accessible
