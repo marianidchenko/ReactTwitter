@@ -1,7 +1,6 @@
 import { Fragment, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { AuthContext } from '../../../contexts/authContext';
-import { ComposeTweetPopup } from '../../Feed/Tweet/ComposeTweet/ComposeTweetPopup';
 import styles from './Navigation.module.css'
 
 export const Navigation = () => {
@@ -53,7 +52,7 @@ export const Navigation = () => {
                         </Link>
                     </li>
                     <li className={styles["menu-items"]}>
-                        <Link to={`/${user.displayName.split("/")[1]}`} className={styles["menu-Link"]}>
+                        <Link to={`/profile/${user.displayName.split("/")[1]}`} className={styles["menu-Link"]}>
                             <i className="fa-solid fa-user" />
                             <p>Profile</p>
                         </Link>

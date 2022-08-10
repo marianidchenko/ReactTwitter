@@ -2,7 +2,7 @@
 
 This application demo is a twitter-like social media application
 
-# Important: the code would require a firebase-config file to run locally, since it's not uploaded you can find it hosted here https://tweeter-4742e.web.app/
+# Note: the code would require a firebase-config file to run locally, since it's not uploaded you can find it hosted here https://tweeter-4742e.web.app/
 
 ## Features
 
@@ -14,6 +14,7 @@ This application demo is a twitter-like social media application
 - Liking, saving and commenting on posts made by other users
 - The ability to tweet and delete (or edit if you prefer that)
 - Following others and keeping track of how many people have followed you
+- Clicking on a tweet to view all details and comments on it
 - Checking out other profiles and all of their posting and commenting history, as well as their likes (They get some privacy with their bookmarks)
 - Keeping track of your favourite posts with bookmarks
 - Editing your profile.
