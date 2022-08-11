@@ -101,7 +101,7 @@ export const Tweet = ({ tweet, replies, setReplies, profileView }) => {
         profileServices.getByUid(tweet.ownerId)
             .then(res => setAuthor(res.docs[0].data()))
         setCurrentTweet(tweet);
-    }, []);
+    }, [user]);
 
     useEffect(() => {
         if (user) {

@@ -12,6 +12,7 @@ export const ProfileEdit = () => {
     const { profile, setProfile, setEditMode } = useContext(ProfileContext);
     const [displayName, setDisplayName] = useState();
     const [bio, setBio] = useState();
+    const [loading, setLoading] = useState(false)
 
     const handleEdit = (e) => {
         e.preventDefault();
@@ -19,18 +20,30 @@ export const ProfileEdit = () => {
         const bannerFile = formData.get('banner');
         const photoFile = formData.get('photo');
         if (bannerFile.size > 0) {
-            profilePhotoServices.uploadBanner(bannerFile, user)
+            profilePhotoServices.uploadBanner(bannerFile, user, setLoading)
                 .then((bannerURL) => { 
                     profileServices.update(profile.id, {bannerURL})
                     setProfile({...profile, bannerURL})
+                    updateProfile(user, {
+                        displayName: `${displayName}/${profile.username}`
+                    })
+                    profileServices.update(profile.id, {displayName, bio});
+                    setProfile({...profile, displayName, bio})
+                    setEditMode(false);
                  })
         }
         if (photoFile.size > 0) {
-            profilePhotoServices.upload(photoFile, user, () => { })
+            profilePhotoServices.upload(photoFile, user, setLoading)
                 .then((photoURL) => { 
                     profileServices.update(profile.id, {photoURL}) 
                     setProfile({...profile, photoURL})
-                    updateProfile(user, {photoURL})
+                    updateProfile(user, {photoURL: photoURL})
+                    updateProfile(user, {
+                        displayName: `${displayName}/${profile.username}`
+                    })
+                    profileServices.update(profile.id, {displayName, bio});
+                    setProfile({...profile, displayName, bio})
+                    setEditMode(false);
                 })
         }
         updateProfile(user, {
@@ -80,7 +93,7 @@ export const ProfileEdit = () => {
                     <input type="text" className={styles["edit-field"]} value={displayName} onChange={(e) => setDisplayName(e.target.value)} name="displayName" />
                     <label className={styles["edit-label"]}>Bio:</label>
                     <textarea className={styles["edit-field"]} value={bio} onChange={(e) => setBio(e.target.value)} name="bio" />
-                    <button type="submit" className={styles["edit-btn"]}>Edit</button>
+                    <button type="submit" className={styles["edit-btn"]} disabled={loading}>Edit</button>
                 </form>
             </div>
         </main>

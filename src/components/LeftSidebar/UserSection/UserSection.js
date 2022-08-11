@@ -1,7 +1,6 @@
 import styles from './UserSection.module.css'
 import * as authService from "../../../services/authServices"
 import { useState } from 'react';
-import { getByOwner } from '../../../services/tweetServices';
 import { useNavigate } from 'react-router-dom';
 export const UserSection = ({ user }) => {
     const navigate = useNavigate();

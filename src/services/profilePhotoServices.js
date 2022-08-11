@@ -1,7 +1,6 @@
 import { updateProfile } from "firebase/auth";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { storage } from "../firebase-config";
-import { uuidv4 } from "@firebase/util";
 
 
 export async function upload(file, currentUser, setLoading) {
@@ -24,7 +23,7 @@ export async function upload(file, currentUser, setLoading) {
   return photoURL;
 }
 
-export async function uploadBanner(file, currentUser) {
+export async function uploadBanner(file, currentUser, setLoading) {
   const fileRef = ref(storage, "banner/" + currentUser.uid + '.png');
 
   const metadata = {
@@ -32,8 +31,12 @@ export async function uploadBanner(file, currentUser) {
     firebaseStorageDownloadTokens: currentUser.accessToken
   };
 
+  setLoading(true);
+
   const snapshot = await uploadBytes(fileRef, file, metadata);
   const photoURL = await getDownloadURL(fileRef);
+
+  setLoading(false);
 
   return photoURL;
 }

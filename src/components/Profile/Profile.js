@@ -24,8 +24,7 @@ export const Profile = () => {
             .then(snapshot => {
                 setProfile({ ...snapshot.docs[0].data(), "id": snapshot.docs[0].id })
             })
-
-    }, [username])
+    }, [username, editMode])
 
     useEffect(() => {
         if (profile) {

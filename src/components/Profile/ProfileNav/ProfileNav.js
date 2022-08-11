@@ -5,8 +5,10 @@ import { Tweet } from "../../Feed/Tweet/Tweet";
 
 export const ProfileNav = ({ tweets, profileLikes }) => {
     const [currentTweets, setCurrentTweets] = useState(tweets);
+    
     useEffect(() => {
         onTweets()
+        setCurrentTweets(tweets)
     }, [tweets]);
 
     const onTweets = () => {
