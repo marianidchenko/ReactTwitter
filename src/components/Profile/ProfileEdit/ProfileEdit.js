@@ -18,7 +18,6 @@ export const ProfileEdit = () => {
         const formData = new FormData(e.target);
         const bannerFile = formData.get('banner');
         const photoFile = formData.get('photo');
-        console.log(bannerFile, photoFile)
         if (bannerFile.size > 0) {
             profilePhotoServices.uploadBanner(bannerFile, user)
                 .then((bannerURL) => { 
