@@ -3,61 +3,18 @@ import { Link } from "react-router-dom"
 import { AuthContext } from "../../../contexts/authContext"
 import { ProfileContext } from "../../../contexts/ProfileContext"
 import styles from "./ProfileEdit.module.css"
-import * as profileServices from "../../../services/profileService"
-import * as profilePhotoServices from "../../../services/profilePhotoServices"
-import { updateProfile } from "firebase/auth"
+import { updateProfileService } from "../../../services/updateProfileService"
 
 export const ProfileEdit = () => {
     const { user } = useContext(AuthContext);
     const { profile, setProfile, setEditMode } = useContext(ProfileContext);
-    const [displayName, setDisplayName] = useState();
-    const [bio, setBio] = useState();
     const [loading, setLoading] = useState(false)
 
     const handleEdit = (e) => {
         e.preventDefault();
         const formData = new FormData(e.target);
-        const bannerFile = formData.get('banner');
-        const photoFile = formData.get('photo');
-        if (bannerFile.size > 0) {
-            profilePhotoServices.uploadBanner(bannerFile, user, setLoading)
-                .then((bannerURL) => { 
-                    profileServices.update(profile.id, {bannerURL})
-                    setProfile({...profile, bannerURL})
-                    updateProfile(user, {
-                        displayName: `${displayName}/${profile.username}`
-                    })
-                    profileServices.update(profile.id, {displayName, bio});
-                    setProfile({...profile, displayName, bio})
-                    setEditMode(false);
-                 })
-        }
-        if (photoFile.size > 0) {
-            profilePhotoServices.upload(photoFile, user, setLoading)
-                .then((photoURL) => { 
-                    profileServices.update(profile.id, {photoURL}) 
-                    setProfile({...profile, photoURL})
-                    updateProfile(user, {photoURL: photoURL})
-                    updateProfile(user, {
-                        displayName: `${displayName}/${profile.username}`
-                    })
-                    profileServices.update(profile.id, {displayName, bio});
-                    setProfile({...profile, displayName, bio})
-                    setEditMode(false);
-                })
-        }
-        updateProfile(user, {
-            displayName: `${displayName}/${profile.username}`
-        })
-        profileServices.update(profile.id, {displayName, bio});
-        setProfile({...profile, displayName, bio})
-        setEditMode(false);
+        updateProfileService(formData, user, profile, setProfile, setLoading, setEditMode);
     }
-
-    useEffect(() => {
-        setDisplayName(profile.displayName);
-        setBio(profile.bio);
-    }, [profile])
 
     return (
         <main className={styles["edit-page"]}>
@@ -90,9 +47,9 @@ export const ProfileEdit = () => {
                     <label htmlFor="" className={styles["edit-label"]}>
                         Display Name:
                     </label>
-                    <input type="text" className={styles["edit-field"]} value={displayName} onChange={(e) => setDisplayName(e.target.value)} name="displayName" />
+                    <input type="text" className={styles["edit-field"]} defaultValue={profile.displayName} name="displayName" />
                     <label className={styles["edit-label"]}>Bio:</label>
-                    <textarea className={styles["edit-field"]} value={bio} onChange={(e) => setBio(e.target.value)} name="bio" />
+                    <textarea className={styles["edit-field"]} defaultValue={profile.bio} name="bio" />
                     <button type="submit" className={styles["edit-btn"]} disabled={loading}>Edit</button>
                 </form>
             </div>
