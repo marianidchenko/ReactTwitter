@@ -3,6 +3,8 @@
 This application demo is a twitter-like social media application
 
 # Note: the code would require a firebase-config file to run locally, since it's not uploaded you can find it hosted here https://tweeter-4742e.web.app/
+- Registering currently does not require email verification
+- If you do not want to make an account anyway use the following to log in -> email: test@abv.bg password: 123456
 
 ## Features
 
