@@ -1,11 +1,27 @@
 import styles from "./RightSidebar.module.css"
+import * as profileServices from "../../services/profileService"
+import {useNavigate} from "react-router-dom"
 
 export const RightSidebar = () => {
+    const navigate = useNavigate();
+    const onSearch = (e) => {
+        if (e.key !== "Enter") {
+            return
+        }
+        e.preventDefault();
+        const searchQuery = document.getElementById("search-bar").value;
+        profileServices.getBySearch(searchQuery)
+        .then(snap => {
+            if (snap.size > 0) {
+                navigate(`/profile/${searchQuery}`)
+            }
+        })
+    }
     return (
         <aside className={styles["sidebar-right"]}>
             <from className={styles["search"]}>
-                <input type="text" placeholder="Search Twitter" className={styles["search-bar"]} />
-                <button type="submit" className={styles["search-btn"]}>
+                <input type="text" placeholder="Search Twitter" className={styles["search-bar"]} id="search-bar" onKeyUp={onSearch}/>
+                <button type="submit" className={styles["search-btn"]} onClick={onSearch}>
                     <i className="fa-solid fa-magnifying-glass" />
                 </button>
             </from>

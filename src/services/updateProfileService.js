@@ -20,7 +20,7 @@ export const updateProfileService = (formData, user, profile, setProfile, setLoa
                 setEditMode(false);
             })
     }
-    if (photoFile.size > 0) {
+    else if (photoFile.size > 0) {
         profilePhotoServices.upload(photoFile, user, setLoading)
             .then((photoURL) => {
                 profileServices.update(profile.id, { photoURL })

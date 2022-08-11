@@ -28,3 +28,9 @@ export const getFollowing = (uid) => {
     const q = query(profileCollectionRef, where("followedBy", "array-contains", uid));
     return getDocs(q);
 }
+
+
+export const getBySearch = (search) => {
+    const q = query(profileCollectionRef, where("username", "==", search));
+    return getDocs(q)
+}
