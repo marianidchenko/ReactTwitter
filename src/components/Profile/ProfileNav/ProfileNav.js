@@ -8,7 +8,6 @@ export const ProfileNav = ({ tweets, profileLikes }) => {
     
     useEffect(() => {
         onTweets()
-        setCurrentTweets(tweets)
     }, [tweets]);
 
     const onTweets = () => {
