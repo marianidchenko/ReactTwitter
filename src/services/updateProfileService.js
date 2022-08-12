@@ -10,27 +10,20 @@ export const updateProfileService = (formData, user, profile, setProfile, setLoa
     if (bannerFile.size > 0) {
         profilePhotoServices.uploadBanner(bannerFile, user, setLoading)
             .then((bannerURL) => {
-                profileServices.update(profile.id, { bannerURL })
-                setProfile({ ...profile, bannerURL })
+                profileServices.update(profile.id, { bannerURL, displayName, bio })
+                setProfile({ ...profile, bannerURL, displayName, bio })
                 updateProfile(user, {
                     displayName: `${displayName}/${profile.username}`
                 })
-                profileServices.update(profile.id, { displayName, bio });
-                setProfile({ ...profile, displayName, bio })
                 setEditMode(false);
             })
     }
     else if (photoFile.size > 0) {
         profilePhotoServices.upload(photoFile, user, setLoading)
             .then((photoURL) => {
-                profileServices.update(profile.id, { photoURL })
-                setProfile({ ...profile, photoURL })
-                updateProfile(user, { photoURL: photoURL })
-                updateProfile(user, {
-                    displayName: `${displayName}/${profile.username}`
-                })
-                profileServices.update(profile.id, { displayName, bio });
-                setProfile({ ...profile, displayName, bio })
+                profileServices.update(profile.id, { photoURL, displayName, bio })
+                setProfile({ ...profile, photoURL, displayName, bio })
+                updateProfile(user, { photoURL: photoURL, displayName: `${displayName}/${profile.username}` })
                 setEditMode(false);
             })
     }

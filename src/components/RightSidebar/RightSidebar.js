@@ -20,7 +20,7 @@ export const RightSidebar = () => {
     return (
         <aside className={styles["sidebar-right"]}>
             <from className={styles["search"]}>
-                <input type="text" placeholder="Search Twitter" className={styles["search-bar"]} id="search-bar" onKeyUp={onSearch}/>
+                <input type="text" placeholder="Search Twitter" className={styles["search-bar"]} id="search-bar"/>
                 <button type="submit" className={styles["search-btn"]} onClick={onSearch}>
                     <i className="fa-solid fa-magnifying-glass" />
                 </button>
